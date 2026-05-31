@@ -135,7 +135,7 @@ function QuestRow({ quest, onAdd, isCompensation = false }: {
           ? 'border-green-500/30 bg-green-500/5'
           : isCompensation
           ? 'border-orange-500/30 bg-orange-500/5'
-          : 'border-[#1f1f1f] bg-[#161616]'
+          : 'border-border bg-surface'
       }`}
     >
       <div
@@ -144,10 +144,10 @@ function QuestRow({ quest, onAdd, isCompensation = false }: {
       >
         <span className="text-xl w-6 text-center flex-shrink-0">{quest.icon}</span>
         <div className="flex-1 min-w-0">
-          <p className={`text-sm font-bold truncate ${isDone ? 'text-green-400' : isCompensation ? 'text-orange-400' : 'text-white'}`}>
+          <p className={`text-sm font-bold truncate ${isDone ? 'text-green-600' : isCompensation ? 'text-orange-600' : 'text-text-main'}`}>
             {quest.label}
           </p>
-          <div className="mt-1.5 h-1.5 bg-[#1a1a1a] rounded-full overflow-hidden">
+          <div className="mt-1.5 h-1.5 bg-border rounded-full overflow-hidden">
             <motion.div
               animate={{ width: `${pct}%` }}
               transition={{ type: 'spring', damping: 20 }}
@@ -157,13 +157,13 @@ function QuestRow({ quest, onAdd, isCompensation = false }: {
           </div>
         </div>
         <div className="text-right flex-shrink-0">
-          <p className={`text-xs font-mono font-bold ${isDone ? 'text-green-400' : 'text-white'}`}>
+          <p className={`text-xs font-mono font-bold ${isDone ? 'text-green-600' : 'text-text-main'}`}>
             {typeof quest.current === 'number' && quest.unit === 'L'
               ? quest.current.toFixed(2)
               : Math.round(quest.current)}/{quest.target}{quest.unit !== 'steps' ? quest.unit : ''}
           </p>
           {!isDone && (
-            <p className="text-[10px] text-[#4b5563]">
+            <p className="text-[10px] text-text-muted">
               {quest.unit === 'L'
                 ? `${(quest.target - quest.current).toFixed(2)}L left`
                 : `${Math.round(quest.target - quest.current)} left`}
@@ -171,7 +171,7 @@ function QuestRow({ quest, onAdd, isCompensation = false }: {
           )}
         </div>
         {!isDone && (
-          <div className="text-[#4b5563]">
+          <div className="text-text-muted">
             {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
           </div>
         )}
@@ -185,7 +185,7 @@ function QuestRow({ quest, onAdd, isCompensation = false }: {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="border-t border-[#1f1f1f] p-3 space-y-2"
+            className="border-t border-border p-3 space-y-2"
           >
             <div className="flex gap-1.5 flex-wrap">
               {QUICK_ADDS[quest.id].map(amt => (
@@ -210,7 +210,7 @@ function QuestRow({ quest, onAdd, isCompensation = false }: {
                 onChange={e => setCustom(e.target.value)}
                 onKeyDown={e => { if (e.key === 'Enter' && custom) { onAdd(quest.id, parseFloat(custom)); setCustom(''); } }}
                 placeholder={`Custom ${quest.unit}`}
-                className="flex-1 bg-[#0a0a0a] border border-[#1f1f1f] focus:border-[#2a2a2a] rounded-lg px-3 py-1.5 text-white text-xs outline-none placeholder-[#4b5563]"
+                className="flex-1 bg-surface border border-border focus:border-primary/50 rounded-lg px-3 py-1.5 text-text-main text-xs outline-none placeholder-text-muted"
               />
               <button
                 onClick={() => { if (custom) { onAdd(quest.id, parseFloat(custom)); setCustom(''); } }}
@@ -326,7 +326,7 @@ export default function AuraQuestSystem({ profile }: AuraQuestSystemProps) {
 
   if (!todayRecord) {
     return (
-      <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-8 flex items-center justify-center">
+      <div className="bg-panel border border-border rounded-2xl p-8 flex items-center justify-center shadow-sm">
         <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
       </div>
     );
@@ -338,22 +338,22 @@ export default function AuraQuestSystem({ profile }: AuraQuestSystemProps) {
   const totalDone = todayRecord.quests.filter(q => q.current >= q.target).length;
 
   return (
-    <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl overflow-hidden">
+    <div className="bg-panel border border-border rounded-2xl overflow-hidden shadow-sm">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#0d0d0d] to-[#111111] border-b border-[#1f1f1f] p-5">
+      <div className="bg-gradient-to-r from-surface to-panel border-b border-border p-5">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
               <Target size={20} className="text-primary" />
             </div>
             <div>
-              <h2 className="text-white font-black text-lg flex items-center gap-2">
+              <h2 className="text-text-main font-black text-lg flex items-center gap-2">
                 Aura Journey
                 <span className="text-xs bg-primary/15 text-primary px-2 py-0.5 rounded-full font-bold border border-primary/20">
                   Day {currentDay}
                 </span>
               </h2>
-              <p className="text-[#6b7280] text-[11px] uppercase tracking-widest">
+              <p className="text-text-muted text-[11px] uppercase tracking-widest font-semibold">
                 {totalDone}/{todayRecord.quests.length} quests done today
               </p>
             </div>
@@ -363,11 +363,11 @@ export default function AuraQuestSystem({ profile }: AuraQuestSystemProps) {
             {/* Streak flame */}
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20">
               <Flame size={14} className="text-orange-500" fill="currentColor" />
-              <span className="text-orange-400 font-bold text-sm">{Math.max(0, currentDay - 1)}d</span>
+              <span className="text-orange-600 font-bold text-sm">{Math.max(0, currentDay - 1)}d</span>
             </div>
             <button
               onClick={handleReset}
-              className="p-2 rounded-xl bg-[#161616] border border-[#1f1f1f] text-[#4b5563] hover:text-red-400 transition-colors"
+              className="p-2 rounded-xl bg-surface border border-border text-text-muted hover:text-red-600 transition-colors hover:bg-red-50"
               title="Reset journey"
             >
               <RotateCcw size={14} />
@@ -376,10 +376,10 @@ export default function AuraQuestSystem({ profile }: AuraQuestSystemProps) {
         </div>
 
         {/* Overall progress bar */}
-        <div className="mt-4 h-1.5 bg-[#1a1a1a] rounded-full overflow-hidden">
+        <div className="mt-4 h-1.5 bg-border rounded-full overflow-hidden">
           <motion.div
             animate={{ width: `${(totalDone / todayRecord.quests.length) * 100}%` }}
-            className="h-full bg-gradient-to-r from-primary to-blue-400 rounded-full"
+            className="h-full bg-gradient-to-r from-primary to-secondary rounded-full"
           />
         </div>
       </div>
@@ -390,9 +390,9 @@ export default function AuraQuestSystem({ profile }: AuraQuestSystemProps) {
           <div className="space-y-3">
             <div className="flex items-center gap-2">
               <AlertTriangle size={16} className="text-orange-500" />
-              <p className="text-orange-400 font-bold text-sm">Makeup Tasks — Complete to Unlock Today</p>
+              <p className="text-orange-600 font-bold text-sm">Makeup Tasks — Complete to Unlock Today</p>
             </div>
-            <div className="bg-orange-500/5 border border-orange-500/20 rounded-xl p-3 text-xs text-orange-300 mb-2">
+            <div className="bg-orange-500/5 border border-orange-500/20 rounded-xl p-3 text-xs text-orange-700 font-medium mb-2">
               ⚠️ You missed quests yesterday. Complete these compensation tasks first to unlock today's quests.
             </div>
             {todayRecord.compensationTasks.map(q => (
@@ -408,10 +408,10 @@ export default function AuraQuestSystem({ profile }: AuraQuestSystemProps) {
               <QuestRow key={q.id} quest={q} onAdd={(id, amt) => updateProgress(id, amt, false)} />
             ))
           ) : (
-            <div className="border border-[#1f1f1f] rounded-xl p-6 flex flex-col items-center gap-3 text-center opacity-50">
-              <Lock size={28} className="text-[#4b5563]" />
-              <p className="text-[#6b7280] text-sm font-bold">Today's quests are locked</p>
-              <p className="text-[#4b5563] text-xs">Complete your makeup tasks above to unlock them</p>
+            <div className="border border-border rounded-xl p-6 flex flex-col items-center gap-3 text-center opacity-70">
+              <Lock size={28} className="text-text-muted" />
+              <p className="text-text-main text-sm font-bold">Today's quests are locked</p>
+              <p className="text-text-muted text-xs">Complete your makeup tasks above to unlock them</p>
             </div>
           )}
         </div>
@@ -426,13 +426,13 @@ export default function AuraQuestSystem({ profile }: AuraQuestSystemProps) {
             <div className="flex items-center gap-2">
               <Star size={20} className="text-[#FDB913]" fill="currentColor" />
               <div>
-                <p className="text-white font-bold text-sm">All Quests Complete!</p>
-                <p className="text-[#9ca3af] text-xs">Claim your Day {currentDay} reward</p>
+                <p className="text-text-main font-bold text-sm">All Quests Complete!</p>
+                <p className="text-text-muted text-xs">Claim your Day {currentDay} reward</p>
               </div>
             </div>
             <button
               onClick={handleClaim}
-              className="bg-[#FDB913] text-black font-black text-sm px-5 py-2 rounded-xl hover:scale-105 active:scale-95 transition-all"
+              className="bg-[#FDB913] text-black font-black text-sm px-5 py-2 rounded-xl hover:scale-105 active:scale-95 transition-all shadow-md"
             >
               Claim 🎉
             </button>
@@ -441,14 +441,14 @@ export default function AuraQuestSystem({ profile }: AuraQuestSystemProps) {
 
         {todayRecord.claimed && (
           <div className="border border-green-500/30 bg-green-500/5 rounded-xl p-4 text-center">
-            <p className="text-green-400 font-bold text-sm">✅ Day {currentDay} Complete! See you tomorrow.</p>
+            <p className="text-green-600 font-bold text-sm">✅ Day {currentDay} Complete! See you tomorrow.</p>
           </div>
         )}
 
         {/* History toggle */}
         <button
           onClick={() => setShowHistory(p => !p)}
-          className="w-full flex items-center justify-between py-2 text-[#6b7280] hover:text-white transition-colors text-xs font-bold uppercase tracking-widest"
+          className="w-full flex items-center justify-between py-2 text-text-muted hover:text-text-main transition-colors text-xs font-bold uppercase tracking-widest"
         >
           <span>Journey History ({data.days.length} days)</span>
           {showHistory ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
@@ -470,14 +470,14 @@ export default function AuraQuestSystem({ profile }: AuraQuestSystemProps) {
                 return (
                   <div key={d.date} className={`flex items-center justify-between p-3 rounded-xl border text-xs ${isToday ? 'border-primary/30 bg-primary/5' : failed === 0 ? 'border-green-500/20 bg-green-500/5' : 'border-red-500/20 bg-red-500/5'}`}>
                     <div className="flex items-center gap-2">
-                      <span className={`font-black ${isToday ? 'text-primary' : failed === 0 ? 'text-green-400' : 'text-red-400'}`}>
+                      <span className={`font-black ${isToday ? 'text-primary' : failed === 0 ? 'text-green-600' : 'text-red-600'}`}>
                         Day {d.day}
                       </span>
-                      <span className="text-[#6b7280]">{d.date}</span>
+                      <span className="text-text-muted">{d.date}</span>
                       {isToday && <span className="text-primary font-bold">(Today)</span>}
                     </div>
                     <div className="flex items-center gap-3">
-                      <span className={failed === 0 ? 'text-green-400' : 'text-red-400'}>
+                      <span className={failed === 0 ? 'text-green-600' : 'text-red-600'}>
                         {done}/{total} {failed === 0 ? '✅' : `(${failed} failed)`}
                       </span>
                       {d.claimed && <Trophy size={12} className="text-[#FDB913]" />}

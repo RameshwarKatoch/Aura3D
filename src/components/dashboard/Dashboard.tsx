@@ -213,20 +213,20 @@ export default React.memo(function Dashboard({ profile, onLogWater, onLogSteps, 
     power: {
       label: 'Power',
       icon: Zap,
-      color: '#FDB913',
-      bg: 'bg-[#FDB913]/10',
-      border: 'border-[#FDB913]/30',
+      color: '#475569',
+      bg: 'bg-primary/10',
+      border: 'border-primary/30',
       description: 'Strength Lab · 1RM Focus',
-      accent: '#FDB913',
+      accent: '#475569',
     },
     endurance: {
       label: 'Endurance',
       icon: Timer,
-      color: '#00F0FF',
-      bg: 'bg-[#00F0FF]/10',
-      border: 'border-[#00F0FF]/30',
+      color: '#94A3B8',
+      bg: 'bg-secondary/10',
+      border: 'border-secondary/30',
       description: 'Stamina Engine · HR Zones',
-      accent: '#00F0FF',
+      accent: '#94A3B8',
     },
     recovery: {
       label: 'Recovery',
@@ -273,28 +273,28 @@ export default React.memo(function Dashboard({ profile, onLogWater, onLogSteps, 
       )}
       <motion.div variants={itemVariants} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-white tracking-tight">Good {getGreeting()}, {profile.name.split(' ')[0]}</h1>
-          <p className="text-[#6b7280] text-sm mt-0.5">{today}</p>
+          <h1 className="text-2xl font-bold text-text-main tracking-tight">Good {getGreeting()}, {profile.name.split(' ')[0]}</h1>
+          <p className="text-text-muted text-sm mt-0.5">{today}</p>
         </div>
         <div className="flex gap-2 items-center">
           <VoiceControl onCommand={handleVoiceCommand} />
           <button
             onClick={toggleLanguage}
-            className="px-3 py-2 rounded-xl border border-[#1f1f1f] bg-[#161616] text-[#6b7280] hover:text-white transition-all text-xs font-bold uppercase glass-button"
+            className="px-3 py-2 rounded-xl border border-border bg-surface text-text-muted hover:text-text-main transition-all text-xs font-bold uppercase glass-button"
           >
             {i18n.language === 'en' ? 'हिन्दी' : 'English'}
           </button>
           <button
             onClick={() => setShowAR(true)}
-            className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-[#2D5BFF]/30 bg-[#2D5BFF]/10 text-white hover:bg-[#2D5BFF]/20 transition-all self-start sm:self-auto shadow-[0_0_15px_rgba(45,91,255,0.2)] hover:shadow-[0_0_25px_rgba(45,91,255,0.4)]"
+            className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-primary/30 bg-primary/10 text-text-main hover:bg-primary/20 transition-all self-start sm:self-auto shadow-sm"
           >
-            <Sparkles size={15} className="text-[#38B6FF] animate-pulse" />
+            <Sparkles size={15} className="text-primary animate-pulse" />
             <span className="text-sm font-semibold leading-tight">Ghost Trainer AR</span>
           </button>
           <div className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl border glass-panel self-start sm:self-auto`}>
             <ModeIcon size={15} style={{ color: modeConfig.color }} className="animate-pulse" />
             <div>
-              <p className="text-white text-sm font-semibold leading-tight">{modeConfig.label}</p>
+              <p className="text-text-main text-sm font-semibold leading-tight">{modeConfig.label}</p>
               <p className="text-xs leading-tight" style={{ color: modeConfig.color }}>{modeConfig.description}</p>
             </div>
           </div>
@@ -370,7 +370,7 @@ export default React.memo(function Dashboard({ profile, onLogWater, onLogSteps, 
             muscleReadiness={computeMuscleReadiness()}
             definitionScale={activeMode === 'power' ? 1.2 : 1 + (simulationImpact?.muscleChange ?? 0) / 10}
             posture={moodData?.mood === 'low' ? -1 : moodData?.mood === 'high' ? 1 : 0}
-            auraColor={activeMode === 'endurance' ? '#00F0FF33' : moodData ? (moodData.stress > 70 ? '#FF3131' : moodData.stress < 30 ? '#38B6FF' : '#FFBD59') : null}
+            auraColor={activeMode === 'endurance' ? '#94A3B833' : moodData ? (moodData.stress > 70 ? '#FF3131' : moodData.stress < 30 ? '#475569' : '#FFBD59') : null}
             visualMode={activeMode}
             soreness={sorenessMap}
             activeSkin={activeSkin}
@@ -394,15 +394,15 @@ export default React.memo(function Dashboard({ profile, onLogWater, onLogSteps, 
               <div className={`p-6 rounded-2xl border ${modeConfig.border} ${modeConfig.bg} h-full flex flex-col`}>
                 <div className="flex items-center gap-3 mb-4">
                   <modeConfig.icon size={24} style={{ color: modeConfig.color }} />
-                  <h3 className="text-xl font-bold text-white uppercase tracking-tighter">{modeConfig.label} Mode</h3>
+                  <h3 className="text-xl font-bold text-text-main uppercase tracking-tighter">{modeConfig.label} Mode</h3>
                 </div>
-                <p className="text-[#9ca3af] text-sm mb-6 flex-1">{modeConfig.description}. All modules optimized for high-performance {activeMode} output.</p>
-                <div className="mt-auto pt-6 border-t border-white/5">
+                <p className="text-text-muted text-sm mb-6 flex-1">{modeConfig.description}. All modules optimized for high-performance {activeMode} output.</p>
+                <div className="mt-auto pt-6 border-t border-border">
                   <div className="flex items-center justify-between text-xs font-bold uppercase tracking-widest mb-2">
-                    <span className="text-[#6b7280]">Mood Sync</span>
+                    <span className="text-text-muted">Mood Sync</span>
                     <span style={{ color: modeConfig.color }}>Connected</span>
                   </div>
-                  <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                  <div className="h-1 bg-gray-200 rounded-full overflow-hidden">
                     <motion.div 
                       className="h-full" 
                       style={{ backgroundColor: modeConfig.color }}
@@ -448,8 +448,8 @@ export default React.memo(function Dashboard({ profile, onLogWater, onLogSteps, 
       </motion.div>
 
       <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-6 flex flex-col items-center">
-          <h3 className="text-[#9ca3af] text-xs font-medium uppercase tracking-wider mb-4 self-start">Body Mass Index</h3>
+        <div className="bg-panel border border-border rounded-2xl p-6 flex flex-col items-center">
+          <h3 className="text-text-muted text-xs font-medium uppercase tracking-wider mb-4 self-start">Body Mass Index</h3>
           <BMIGauge bmi={bmi} />
           <div className="mt-4 w-full grid grid-cols-3 gap-2 text-center">
             {[
@@ -459,17 +459,17 @@ export default React.memo(function Dashboard({ profile, onLogWater, onLogSteps, 
             ].map(item => (
               <div
                 key={item.label}
-                className={`rounded-lg p-2 ${item.active ? 'bg-[#1f1f1f]' : ''}`}
+                className={`rounded-lg p-2 ${item.active ? 'bg-surface' : ''}`}
               >
-                <p className={`text-xs font-medium ${item.active ? 'text-white' : 'text-[#4b5563]'}`}>{item.label}</p>
-                <p className="text-[#4b5563] text-[10px]">{item.range}</p>
+                <p className={`text-xs font-medium ${item.active ? 'text-text-main' : 'text-text-muted'}`}>{item.label}</p>
+                <p className="text-text-muted text-[10px]">{item.range}</p>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="lg:col-span-2 bg-[#111111] border border-[#1f1f1f] rounded-2xl p-6">
-          <h3 className="text-[#9ca3af] text-xs font-medium uppercase tracking-wider mb-5">Daily Macro Targets</h3>
+        <div className="lg:col-span-2 bg-panel border border-border rounded-2xl p-6">
+          <h3 className="text-text-muted text-xs font-medium uppercase tracking-wider mb-5">Daily Macro Targets</h3>
           <MacroRings
             calories={nutrition.targetCalories}
             protein={nutrition.targetProtein}
@@ -488,10 +488,10 @@ export default React.memo(function Dashboard({ profile, onLogWater, onLogSteps, 
               return (
                 <div key={macro.label}>
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-[#9ca3af] text-xs">{macro.label}</span>
-                    <span className="text-white text-xs font-medium">{macro.value}g <span className="text-[#4b5563]">({pct}%)</span></span>
+                    <span className="text-text-muted text-xs">{macro.label}</span>
+                    <span className="text-text-main text-xs font-medium">{macro.value}g <span className="text-text-muted">({pct}%)</span></span>
                   </div>
-                  <div className="h-1.5 bg-[#1f1f1f] rounded-full overflow-hidden">
+                  <div className="h-1.5 bg-border rounded-full overflow-hidden">
                     <div
                       className="h-full rounded-full transition-all duration-1000"
                       style={{ width: `${pct}%`, backgroundColor: macro.color }}
@@ -505,15 +505,15 @@ export default React.memo(function Dashboard({ profile, onLogWater, onLogSteps, 
       </motion.div>
 
       <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-6">
-          <h3 className="text-[#9ca3af] text-xs font-medium uppercase tracking-wider mb-4">Weight Journey</h3>
+        <div className="bg-panel border border-border rounded-2xl p-6">
+          <h3 className="text-text-muted text-xs font-medium uppercase tracking-wider mb-4">Weight Journey</h3>
           <div className="flex items-end gap-6">
             <div>
-              <p className="text-[#6b7280] text-xs mb-1">Current</p>
-              <p className="text-white text-3xl font-bold">{profile.weight_kg}<span className="text-[#6b7280] text-base ml-1">kg</span></p>
+              <p className="text-text-muted text-xs mb-1">Current</p>
+              <p className="text-text-main text-3xl font-bold">{profile.weight_kg}<span className="text-text-muted text-base ml-1">kg</span></p>
             </div>
             <div className="flex-1 flex flex-col items-center">
-              <div className="w-full h-px bg-[#2a2a2a] relative">
+              <div className="w-full h-px bg-border relative">
                 <div
                   className="absolute top-1/2 -translate-y-1/2 h-2 rounded-full transition-all duration-1000"
                   style={{
@@ -524,19 +524,19 @@ export default React.memo(function Dashboard({ profile, onLogWater, onLogSteps, 
                   }}
                 />
               </div>
-              <p className="text-[#4b5563] text-xs mt-2">
+              <p className="text-text-muted text-xs mt-2">
                 {weightDiff === 0 ? 'At ideal weight' : weightDiff > 0 ? `${weightDiff}kg above ideal` : `${Math.abs(weightDiff)}kg below ideal`}
               </p>
             </div>
             <div>
-              <p className="text-[#6b7280] text-xs mb-1">Ideal</p>
-              <p className="text-white text-3xl font-bold">{idealWeight}<span className="text-[#6b7280] text-base ml-1">kg</span></p>
+              <p className="text-text-muted text-xs mb-1">Ideal</p>
+              <p className="text-text-main text-3xl font-bold">{idealWeight}<span className="text-text-muted text-base ml-1">kg</span></p>
             </div>
           </div>
         </div>
 
-        <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-6">
-          <h3 className="text-[#9ca3af] text-xs font-medium uppercase tracking-wider mb-4">Profile Summary</h3>
+        <div className="bg-panel border border-border rounded-2xl p-6">
+          <h3 className="text-text-muted text-xs font-medium uppercase tracking-wider mb-4">Profile Summary</h3>
           <div className="grid grid-cols-2 gap-3">
             {[
               { label: 'Age', value: `${profile.age} years` },
@@ -544,9 +544,9 @@ export default React.memo(function Dashboard({ profile, onLogWater, onLogSteps, 
               { label: 'Goal', value: goalLabels[profile.goal] },
               { label: 'Diet', value: profile.dietary_preference.replace('_', '-').toUpperCase() },
             ].map(item => (
-              <div key={item.label} className="bg-[#161616] rounded-xl p-3">
-                <p className="text-[#4b5563] text-xs mb-1">{item.label}</p>
-                <p className="text-white text-sm font-medium">{item.value}</p>
+              <div key={item.label} className="bg-surface rounded-xl p-3 border border-border">
+                <p className="text-text-muted text-xs mb-1">{item.label}</p>
+                <p className="text-text-main text-sm font-medium">{item.value}</p>
               </div>
             ))}
           </div>
@@ -554,14 +554,14 @@ export default React.memo(function Dashboard({ profile, onLogWater, onLogSteps, 
             <Target size={16} className="text-primary flex-shrink-0" />
             <div>
               <p className="text-primary text-xs font-medium">Protein Target</p>
-              <p className="text-white text-sm">{nutrition.targetProtein}g/day <span className="text-[#6b7280] text-xs">({(nutrition.targetProtein / profile.weight_kg).toFixed(1)}g per kg)</span></p>
+              <p className="text-text-main text-sm">{nutrition.targetProtein}g/day <span className="text-text-muted text-xs">({(nutrition.targetProtein / profile.weight_kg).toFixed(1)}g per kg)</span></p>
             </div>
           </div>
           <div className={`mt-2 flex items-center gap-2 rounded-xl p-3 border ${modeConfig.bg} ${modeConfig.border}`}>
             <ModeIcon size={16} style={{ color: modeConfig.color }} className="flex-shrink-0" />
             <div>
               <p className="text-xs font-medium" style={{ color: modeConfig.color }}>Active: {modeConfig.label}</p>
-              <p className="text-white text-sm">{modeConfig.description}</p>
+              <p className="text-text-main text-sm">{modeConfig.description}</p>
             </div>
           </div>
         </div>

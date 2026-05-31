@@ -17,21 +17,21 @@ const genders: { value: Gender; label: string }[] = [
 export default function StepBasicInfo({ data, update, onNext, onBack }: Props) {
   return (
     <div>
-      <h2 className="text-2xl font-bold text-white mb-1">Basic information</h2>
-      <p className="text-[#6b7280] mb-8 text-sm">We use this to calibrate your metrics accurately.</p>
+      <h2 className="text-2xl font-bold text-text-main mb-1">Basic information</h2>
+      <p className="text-text-muted mb-8 text-sm">We use this to calibrate your metrics accurately.</p>
 
       <div className="space-y-5">
         <div>
-          <label className="block text-[#9ca3af] text-xs font-medium mb-2 uppercase tracking-wider">Gender</label>
+          <label className="block text-text-muted text-xs font-semibold mb-2 uppercase tracking-wider">Gender</label>
           <div className="grid grid-cols-3 gap-2">
             {genders.map(g => (
               <button
                 key={g.value}
                 onClick={() => update({ gender: g.value })}
-                className={`py-3 rounded-xl text-sm font-medium transition-all duration-200 border ${
+                className={`py-3 rounded-xl text-sm font-semibold transition-all duration-200 border ${
                   data.gender === g.value
-                    ? 'bg-emerald-500 border-emerald-500 text-black'
-                    : 'bg-[#1a1a1a] border-[#2a2a2a] text-[#9ca3af] hover:border-[#3a3a3a]'
+                    ? 'bg-primary border-primary text-white shadow-sm'
+                    : 'bg-surface border-border text-text-muted hover:border-gray-300'
                 }`}
               >
                 {g.label}
@@ -53,13 +53,13 @@ export default function StepBasicInfo({ data, update, onNext, onBack }: Props) {
       <div className="flex gap-3 mt-8">
         <button
           onClick={onBack}
-          className="flex-1 bg-[#1a1a1a] border border-[#2a2a2a] hover:border-[#3a3a3a] text-[#9ca3af] font-semibold py-3.5 rounded-xl transition-all duration-200"
+          className="flex-1 bg-surface border border-border hover:bg-gray-100 text-text-main font-semibold py-3.5 rounded-xl transition-all duration-200"
         >
           Back
         </button>
         <button
           onClick={() => data.age > 0 && onNext()}
-          className="flex-[2] bg-emerald-500 hover:bg-emerald-400 text-black font-semibold py-3.5 rounded-xl transition-all duration-200 active:scale-[0.98]"
+          className="flex-[2] bg-primary hover:bg-primary/95 text-white font-semibold py-3.5 rounded-xl transition-all duration-200 active:scale-[0.98]"
         >
           Continue
         </button>

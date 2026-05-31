@@ -1,6 +1,6 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useMemo } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { CameraControls, ContactShadows, Environment, Float, Html, MeshDistortMaterial } from '@react-three/drei';
+import { CameraControls, ContactShadows, Environment, Float, Html, MeshDistortMaterial, useGLTF, Center } from '@react-three/drei';
 import * as THREE from 'three';
 import type { MuscleReadiness, MuscleGroupName, TrainingMode } from '../../types';
 
@@ -614,7 +614,7 @@ function CameraAnimator({ activeMuscle }: { activeMuscle: MuscleGroup }) {
   return <CameraControls ref={controls} makeDefault minDistance={2} maxDistance={12} />;
 }
 
-// ─── Muscle Readiness Legend (HTML overlay) ───────────────────────────────────
+// ─── Readiness Legend (HTML overlay) ───────────────────────────────────
 function ReadinessLegend({ muscleReadiness }: { muscleReadiness: Record<string, MuscleReadiness> }) {
   const order: MuscleReadiness[] = ['fatigued', 'recovering', 'ready', 'primed', 'fresh', 'unknown'];
   // Only show states that exist in current data, plus always show fatigued/fresh
@@ -622,8 +622,8 @@ function ReadinessLegend({ muscleReadiness }: { muscleReadiness: Record<string, 
   const toShow = order.filter(s => present.has(s) || s === 'fatigued' || s === 'fresh');
 
   return (
-    <div className="absolute bottom-4 left-4 z-10 bg-[#0d0d0d]/90 border border-[#1f1f1f] rounded-xl p-3 backdrop-blur-sm">
-      <p className="text-white text-xs font-bold uppercase tracking-wider mb-2.5">Muscle Readiness</p>
+    <div className="absolute bottom-4 left-4 z-10 bg-panel/90 border border-border rounded-xl p-3 backdrop-blur-sm">
+      <p className="text-text-main text-xs font-bold uppercase tracking-wider mb-2.5">Muscle Readiness</p>
       <div className="space-y-1.5">
         {toShow.map(state => {
           const cfg = READINESS_CONFIG[state];
@@ -634,8 +634,8 @@ function ReadinessLegend({ muscleReadiness }: { muscleReadiness: Record<string, 
                 style={{ backgroundColor: cfg.color, boxShadow: `0 0 6px ${cfg.color}60, 0 0 0 1px ${cfg.color}40` }}
               />
               <div>
-                <span className="text-white text-[11px] font-medium">{cfg.label}</span>
-                <span className="text-[#6b7280] text-[10px] ml-1.5">{cfg.description}</span>
+                <span className="text-text-main text-[11px] font-medium">{cfg.label}</span>
+                <span className="text-text-muted text-[10px] ml-1.5">{cfg.description}</span>
               </div>
             </div>
           );
@@ -644,6 +644,191 @@ function ReadinessLegend({ muscleReadiness }: { muscleReadiness: Record<string, 
     </div>
   );
 }
+
+// ─── GLBFigure ────────────────────────────────────────────────────────────────
+export function GLBFigure({
+  onMuscleClick,
+  weightScale,
+  muscleReadiness = {},
+  hovered,
+  setHovered,
+  definitionScale = 1,
+  posture = 0,
+  auraColor = null,
+  visualMode = 'power',
+  soreness = {},
+  activeSkin = 'blue',
+  poseLandmarks = null,
+  setMeshNames
+}: any) {
+  const { scene } = useGLTF('/male_base_muscular_anatomy.glb');
+  const group = useRef<THREE.Group>(null);
+  
+  // Create a copy of the scene to avoid mutating the cached original
+  const clonedScene = useMemo(() => scene.clone(), [scene]);
+
+  // Extract mesh names once on load
+  useEffect(() => {
+    const names: string[] = [];
+    clonedScene.traverse((child) => {
+      if ((child as THREE.Mesh).isMesh) {
+        const mesh = child as THREE.Mesh;
+        names.push(mesh.name || 'Unnamed Mesh');
+      }
+    });
+    console.log("GLB Mesh Names found:", names);
+    if (setMeshNames) {
+      setMeshNames(names);
+    }
+  }, [clonedScene, setMeshNames]);
+
+  // Fuzzy match function for muscle names
+  const mapMeshNameToMuscle = (meshName: string): MuscleGroup => {
+    const name = meshName.toLowerCase();
+    if (name.includes('chest') || name.includes('pectoralis')) return 'Chest';
+    if (name.includes('abs') || name.includes('abdomin') || name.includes('rectus abdominis')) return 'Abs';
+    if (name.includes('shoulder') || name.includes('deltoid')) return 'Shoulders';
+    if (name.includes('bicep')) return 'Biceps';
+    if (name.includes('tricep')) return 'Triceps';
+    if (name.includes('forearm') || name.includes('brachio')) return 'Forearms';
+    if (name.includes('trap') || name.includes('trapezius')) return 'Traps';
+    if (name.includes('lat') || name.includes('latissimus')) return 'Lats';
+    if (name.includes('glute')) return 'Glutes';
+    if (name.includes('quad') || name.includes('rectus femoris') || name.includes('vastus')) return 'Quads';
+    if (name.includes('hamstring') || name.includes('biceps femoris') || name.includes('semitend')) return 'Hamstrings';
+    if (name.includes('calf') || name.includes('calves') || name.includes('gastrocnemius') || name.includes('soleus')) return 'Calves';
+    
+    const exactMatches: Record<string, MuscleGroupName> = {
+      'chest': 'Chest',
+      'abs': 'Abs',
+      'shoulders': 'Shoulders',
+      'biceps': 'Biceps',
+      'triceps': 'Triceps',
+      'forearms': 'Forearms',
+      'traps': 'Traps',
+      'lats': 'Lats',
+      'glutes': 'Glutes',
+      'quads': 'Quads',
+      'hamstrings': 'Hamstrings',
+      'calves': 'Calves'
+    };
+    
+    for (const [key, value] of Object.entries(exactMatches)) {
+      if (name === key) return value;
+    }
+    
+    return null;
+  };
+
+  // Dynamically update materials based on muscle states and hovers
+  useEffect(() => {
+    clonedScene.traverse((child) => {
+      if ((child as THREE.Mesh).isMesh) {
+        const mesh = child as THREE.Mesh;
+        const muscle = mapMeshNameToMuscle(mesh.name);
+        
+        if (muscle) {
+          const isHovered = hovered === muscle;
+          
+          if (visualMode === 'recovery') {
+            const level = soreness[muscle] ?? 0;
+            mesh.material = new THREE.MeshPhysicalMaterial({
+              color: isHovered ? '#ffffff' : level > 0 ? '#A78BFA' : '#1f2937',
+              emissive: level > 0 ? '#8B5CF6' : '#000000',
+              emissiveIntensity: isHovered ? 0.8 : level * 2,
+              metalness: 0.5,
+              roughness: 0.2,
+              transparent: true,
+              opacity: 0.9,
+            });
+          } else {
+            const readiness = muscleReadiness[muscle] ?? 'unknown';
+            const cfg = READINESS_CONFIG[readiness];
+            mesh.material = new THREE.MeshPhysicalMaterial({
+              color: isHovered ? '#ffffff' : cfg.color,
+              metalness: 0.2,
+              roughness: 0.3,
+              transmission: isHovered ? 0.35 : 0.1,
+              thickness: 1.5,
+              emissive: isHovered ? '#ffffff' : cfg.emissive,
+              emissiveIntensity: isHovered ? 0.8 : (readiness === 'unknown' ? 0.1 : 0.5),
+              transparent: true,
+              opacity: 0.95,
+            });
+          }
+        } else {
+          // Unmapped base body or skeleton elements
+          mesh.material = new THREE.MeshPhysicalMaterial({
+            color: visualMode === 'power' ? '#FDB913' : '#38B6FF',
+            metalness: 0.8,
+            roughness: 0.2,
+            transmission: 0.5,
+            thickness: 1.5,
+            transparent: true,
+            opacity: 0.35,
+            emissive: visualMode === 'power' ? '#FDB913' : '#38B6FF',
+            emissiveIntensity: 0.1,
+          });
+        }
+      }
+    });
+  }, [clonedScene, hovered, muscleReadiness, soreness, visualMode]);
+
+  // Compute bounding box dimensions to auto-scale the model to target height
+  const scaleFactor = useMemo(() => {
+    const box = new THREE.Box3().setFromObject(clonedScene);
+    const size = new THREE.Vector3();
+    box.getSize(size);
+    
+    // Target height in world units (similar height to HumanFigure)
+    const targetHeight = 5.0;
+    const factor = targetHeight / Math.max(size.y, 0.001);
+    console.log("GLB original size:", size, "computed scaleFactor:", factor);
+    return factor;
+  }, [clonedScene]);
+
+  useFrame(() => {
+    if (group.current) {
+      const currentScale = weightScale * scaleFactor;
+      group.current.scale.lerp(new THREE.Vector3(currentScale, currentScale, currentScale), 0.1);
+    }
+  });
+
+  return (
+    <group ref={group} position={[0, 0, 0]}>
+      <Center>
+        <primitive
+          object={clonedScene}
+          onPointerOver={(e: any) => {
+            e.stopPropagation();
+            const meshName = e.object.name;
+            const muscle = mapMeshNameToMuscle(meshName);
+            if (muscle) {
+              setHovered(muscle);
+              document.body.style.cursor = 'pointer';
+            }
+          }}
+          onPointerOut={(e: any) => {
+            e.stopPropagation();
+            setHovered(null);
+            document.body.style.cursor = 'default';
+          }}
+          onClick={(e: any) => {
+            e.stopPropagation();
+            const meshName = e.object.name;
+            const muscle = mapMeshNameToMuscle(meshName);
+            if (muscle) {
+              onMuscleClick(muscle);
+            }
+          }}
+        />
+      </Center>
+    </group>
+  );
+}
+
+// Preload the model so it loads instantly
+useGLTF.preload('/male_base_muscular_anatomy.glb');
 
 // ─── Main Export ──────────────────────────────────────────────────────────────
 export default function Anatomy3D({
@@ -662,14 +847,16 @@ export default function Anatomy3D({
   const [hovered, setHovered] = useState<MuscleGroup>(null);
 
   return (
-    <div className="w-full h-[500px] bg-[#0d0d0d] rounded-2xl overflow-hidden border border-[#1f1f1f] relative">
+    <div className="w-full h-[500px] bg-panel rounded-2xl overflow-hidden border border-border relative">
       <div className="absolute top-4 left-4 z-10 pointer-events-none">
-        <h3 className="text-white font-medium text-lg">Muscle Heatmap</h3>
-        <p className="text-[#6b7280] text-sm">Click a muscle for personalised insights</p>
+        <h3 className="text-text-main font-medium text-lg">Muscle Heatmap</h3>
+        <p className="text-text-muted text-sm">Click a muscle for personalised insights</p>
       </div>
 
+
+
       <Canvas camera={{ position: [0, 2, 8], fov: 45 }}>
-        <color attach="background" args={['#0d0d0d']} />
+        <color attach="background" args={['#F9F8F6']} />
         <ambientLight intensity={0.6} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={2} castShadow />
         <spotLight position={[-10, 10, -10]} angle={0.15} penumbra={1} intensity={1} color="#2D5BFF" />
@@ -690,7 +877,7 @@ export default function Anatomy3D({
           poseLandmarks={poseLandmarks}
         />
 
-        <ContactShadows position={[0, -2, 0]} opacity={0.4} scale={10} blur={2} far={4} />
+        <ContactShadows position={[0, -2.5, 0]} opacity={0.4} scale={10} blur={2} far={4} />
         <CameraAnimator activeMuscle={activeMuscle} />
       </Canvas>
 

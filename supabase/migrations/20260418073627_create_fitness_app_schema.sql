@@ -59,6 +59,7 @@ CREATE TABLE IF NOT EXISTS user_profiles (
   activity_level text NOT NULL DEFAULT 'moderate' CHECK (activity_level IN ('sedentary', 'light', 'moderate', 'active', 'very_active')),
   dietary_preference text NOT NULL DEFAULT 'non_veg' CHECK (dietary_preference IN ('veg', 'non_veg', 'vegan', 'keto')),
   goal text NOT NULL DEFAULT 'maintain' CHECK (goal IN ('lose', 'maintain', 'gain')),
+  training_mode text NOT NULL DEFAULT 'power' CHECK (training_mode IN ('power', 'endurance', 'recovery')),
   created_at timestamptz DEFAULT now(),
   updated_at timestamptz DEFAULT now()
 );

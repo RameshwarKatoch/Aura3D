@@ -19,20 +19,20 @@ export default function SleepChart({ data, onLogSleep }: Props) {
   });
 
   return (
-    <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-6">
+    <div className="bg-panel border border-border rounded-2xl p-6 shadow-sm">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
             <Bed size={16} className="text-primary" />
           </div>
           <div>
-            <h3 className="text-white font-medium text-sm">Sleep Hub</h3>
-            <p className="text-[#6b7280] text-xs">7-Day Trends</p>
+            <h3 className="text-text-main font-medium text-sm">Sleep Hub</h3>
+            <p className="text-text-muted text-xs">7-Day Trends</p>
           </div>
         </div>
         <div className="flex items-center gap-4 text-right">
-          <p className="text-white font-bold text-xl">
-            {(data.reduce((acc, curr) => acc + curr.hours, 0) / (data.length || 1)).toFixed(1)}<span className="text-[#6b7280] text-sm font-normal ml-1">avg hrs</span>
+          <p className="text-text-main font-bold text-xl">
+            {(data.reduce((acc, curr) => acc + curr.hours, 0) / (data.length || 1)).toFixed(1)}<span className="text-text-muted text-sm font-normal ml-1">avg hrs</span>
           </p>
           {onLogSleep && (
             <button
@@ -51,33 +51,33 @@ export default function SleepChart({ data, onLogSleep }: Props) {
           <AreaChart data={chartData} margin={{ top: 5, right: 0, left: -20, bottom: 0 }}>
             <defs>
               <linearGradient id="colorHours" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#0070FF" stopOpacity={0.3}/>
-                <stop offset="95%" stopColor="#0070FF" stopOpacity={0}/>
+                <stop offset="5%" stopColor="#475569" stopOpacity={0.3}/>
+                <stop offset="95%" stopColor="#475569" stopOpacity={0}/>
               </linearGradient>
             </defs>
             <XAxis 
               dataKey="day" 
               axisLine={false} 
               tickLine={false} 
-              tick={{ fill: '#6b7280', fontSize: 12 }} 
+              tick={{ fill: '#6B7280', fontSize: 12 }} 
               dy={10}
             />
             <YAxis 
               axisLine={false} 
               tickLine={false} 
-              tick={{ fill: '#6b7280', fontSize: 12 }} 
+              tick={{ fill: '#6B7280', fontSize: 12 }} 
               domain={[0, 'dataMax + 2']}
             />
             <Tooltip 
-              contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #2a2a2a', borderRadius: '8px' }}
-              itemStyle={{ color: '#fff' }}
-              labelStyle={{ color: '#9ca3af', marginBottom: '4px' }}
+              contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #e5e7eb', borderRadius: '8px' }}
+              itemStyle={{ color: '#1f2937' }}
+              labelStyle={{ color: '#6b7280', marginBottom: '4px' }}
               formatter={(value: any) => [`${value} hrs`, 'Slept']}
             />
             <Area 
               type="monotone" 
               dataKey="hours" 
-              stroke="#0070FF" 
+              stroke="#475569" 
               strokeWidth={3}
               fillOpacity={1} 
               fill="url(#colorHours)" 

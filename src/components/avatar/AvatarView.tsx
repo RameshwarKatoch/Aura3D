@@ -14,12 +14,12 @@ function BodyAvatar({ weightScale }: { weightScale: number }) {
   const [hovered, setHovered] = useState<MuscleGroup>(null);
   
   return (
-    <div className="w-full h-[400px] bg-[#0d0d0d] rounded-2xl overflow-hidden relative">
+    <div className="w-full h-[400px] bg-surface rounded-2xl overflow-hidden relative">
       <Canvas camera={{ position: [0, 2, 8], fov: 45 }}>
-        <color attach="background" args={['#0d0d0d']} />
-        <ambientLight intensity={0.6} />
+        <color attach="background" args={['#F9F8F6']} />
+        <ambientLight intensity={0.8} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={2} castShadow />
-        <spotLight position={[-10, 10, -10]} angle={0.15} penumbra={1} intensity={1} color="#2D5BFF" />
+        <spotLight position={[-10, 10, -10]} angle={0.15} penumbra={1} intensity={1} color="#94A3B8" />
         <Environment preset="city" />
 
         <HumanFigure
@@ -30,7 +30,7 @@ function BodyAvatar({ weightScale }: { weightScale: number }) {
           setHovered={setHovered}
         />
 
-        <ContactShadows position={[0, -2, 0]} opacity={0.4} scale={10} blur={2} far={4} />
+        <ContactShadows position={[0, -2, 0]} opacity={0.2} scale={10} blur={2} far={4} />
         <CameraControls makeDefault minDistance={4} maxDistance={10} />
       </Canvas>
     </div>
@@ -42,10 +42,10 @@ function MeasurementLine({ label, value, max, color }: { label: string; value: n
   return (
     <div>
       <div className="flex justify-between items-center mb-1.5">
-        <span className="text-[#9ca3af] text-xs">{label}</span>
-        <span className="text-white text-xs font-semibold">{value.toFixed(1)} <span className="text-[#4b5563]">kg</span></span>
+        <span className="text-text-muted text-xs">{label}</span>
+        <span className="text-text-main text-xs font-semibold">{value.toFixed(1)} <span className="text-text-muted">kg</span></span>
       </div>
-      <div className="h-1.5 bg-[#1f1f1f] rounded-full overflow-hidden">
+      <div className="h-1.5 bg-surface border border-border/50 rounded-full overflow-hidden">
         <div
           className="h-full rounded-full transition-all duration-1000"
           style={{ width: `${pct}%`, backgroundColor: color }}
@@ -84,38 +84,38 @@ export default function AvatarView({ profile }: Props) {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-white">Body Avatar</h1>
-        <p className="text-[#6b7280] text-sm mt-0.5">3D visualization based on your biometric data</p>
+        <h1 className="text-2xl font-bold text-text-main">Body Avatar</h1>
+        <p className="text-text-muted text-sm mt-0.5">3D visualization based on your biometric data</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <div className="lg:col-span-1 bg-[#111111] border border-[#1f1f1f] rounded-2xl p-6 flex flex-col items-center">
+        <div className="lg:col-span-1 bg-panel border border-border rounded-2xl p-6 flex flex-col items-center">
           <div className="relative w-full">
             <BodyAvatar weightScale={1 + ((profile.weight_kg - idealWeight) / profile.weight_kg)} />
 
             <div className="absolute top-4 right-4 space-y-2">
-              <div className="bg-[#0a0a0a]/90 backdrop-blur-md border border-white/10 rounded-xl px-3 py-2 text-right shadow-xl">
-                <p className="text-[#6b7280] text-[10px] uppercase tracking-widest font-bold">BMI Index</p>
-                <p className="text-white text-lg font-black">{bmi.value}</p>
+              <div className="bg-panel/90 backdrop-blur-md border border-border rounded-xl px-3 py-2 text-right shadow-xl">
+                <p className="text-text-muted text-[10px] uppercase tracking-widest font-bold">BMI Index</p>
+                <p className="text-text-main text-lg font-black">{bmi.value}</p>
               </div>
-              <div className="bg-[#0a0a0a]/90 backdrop-blur-md border border-white/10 rounded-xl px-3 py-2 text-right shadow-xl">
-                <p className="text-[#6b7280] text-[10px] uppercase tracking-widest font-bold">Health Status</p>
+              <div className="bg-panel/90 backdrop-blur-md border border-border rounded-xl px-3 py-2 text-right shadow-xl">
+                <p className="text-text-muted text-[10px] uppercase tracking-widest font-bold">Health Status</p>
                 <p className="font-bold text-sm" style={{ color: bmi.color }}>{bmi.category}</p>
               </div>
             </div>
           </div>
 
           <div className="mt-2 text-center">
-            <p className="text-white font-bold text-xl">{profile.name}</p>
-            <p className="text-[#6b7280] text-sm">
+            <p className="text-text-main font-bold text-xl">{profile.name}</p>
+            <p className="text-text-muted text-sm">
               {profile.height_cm}cm · {profile.weight_kg}kg · {profile.age}yrs
             </p>
           </div>
         </div>
 
         <div className="lg:col-span-2 space-y-4">
-          <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-6">
-            <h3 className="text-[#9ca3af] text-xs font-medium uppercase tracking-wider mb-5">Body Composition (Estimated)</h3>
+          <div className="bg-panel border border-border rounded-2xl p-6">
+            <h3 className="text-text-muted text-xs font-medium uppercase tracking-wider mb-5">Body Composition (Estimated)</h3>
             <div className="space-y-4">
               <MeasurementLine label="Estimated Fat Mass" value={fatMass} max={profile.weight_kg} color="#ef4444" />
               <MeasurementLine label="Estimated Lean Mass" value={muscleMass} max={profile.weight_kg} color="#3b82f6" />
@@ -123,24 +123,24 @@ export default function AvatarView({ profile }: Props) {
               <MeasurementLine label="Ideal Body Weight" value={idealWeight} max={profile.weight_kg * 1.5} color="#10b981" />
             </div>
 
-            <div className="mt-5 h-3 bg-[#1f1f1f] rounded-full overflow-hidden flex">
+            <div className="mt-5 h-3 bg-surface border border-border rounded-full overflow-hidden flex">
               <div className="h-full bg-[#3b82f6] transition-all duration-1000" style={{ width: `${(muscleMass / profile.weight_kg) * 100}%` }} />
               <div className="h-full bg-[#ef4444] transition-all duration-1000" style={{ width: `${(fatMass / profile.weight_kg) * 100}%` }} />
             </div>
             <div className="flex justify-between mt-2">
               <div className="flex items-center gap-1.5">
                 <div className="w-2 h-2 rounded-full bg-[#3b82f6]" />
-                <span className="text-[#6b7280] text-xs">Lean Mass {Math.round((muscleMass / profile.weight_kg) * 100)}%</span>
+                <span className="text-text-muted text-xs">Lean Mass {Math.round((muscleMass / profile.weight_kg) * 100)}%</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <div className="w-2 h-2 rounded-full bg-[#ef4444]" />
-                <span className="text-[#6b7280] text-xs">Fat Mass {Math.round((fatMass / profile.weight_kg) * 100)}%</span>
+                <span className="text-text-muted text-xs">Fat Mass {Math.round((fatMass / profile.weight_kg) * 100)}%</span>
               </div>
             </div>
           </div>
 
-          <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-6">
-            <h3 className="text-[#9ca3af] text-xs font-medium uppercase tracking-wider mb-5">BMI Scale</h3>
+          <div className="bg-panel border border-border rounded-2xl p-6">
+            <h3 className="text-text-muted text-xs font-medium uppercase tracking-wider mb-5">BMI Scale</h3>
             <div className="relative h-4 rounded-full overflow-hidden mb-3">
               <div className="absolute inset-0 flex">
                 {bmiRanges.map(r => (
@@ -159,7 +159,7 @@ export default function AvatarView({ profile }: Props) {
               {bmiRanges.map(r => (
                 <div key={r.label} className="text-center flex-1">
                   <p style={{ color: r.color }} className="text-[10px] font-medium">{r.label}</p>
-                  <p className="text-[#4b5563] text-[9px]">{r.min}–{r.max}</p>
+                  <p className="text-text-muted text-[9px]">{r.min}–{r.max}</p>
                 </div>
               ))}
             </div>
@@ -171,10 +171,10 @@ export default function AvatarView({ profile }: Props) {
               { label: 'Protein Need', value: `${nutrition.targetProtein}g`, unit: 'per day', color: '#3b82f6' },
               { label: 'Ideal Weight', value: `${idealWeight}kg`, unit: 'target', color: '#f59e0b' },
             ].map(stat => (
-              <div key={stat.label} className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-4 text-center">
-                <p className="text-[#6b7280] text-[10px] uppercase tracking-wide mb-1">{stat.label}</p>
+              <div key={stat.label} className="bg-panel border border-border rounded-2xl p-4 text-center">
+                <p className="text-text-muted text-[10px] uppercase tracking-wide mb-1">{stat.label}</p>
                 <p className="font-bold text-lg" style={{ color: stat.color }}>{stat.value}</p>
-                <p className="text-[#4b5563] text-[10px]">{stat.unit}</p>
+                <p className="text-text-muted text-[10px]">{stat.unit}</p>
               </div>
             ))}
           </div>

@@ -68,24 +68,24 @@ export default function OnboardingFlow({ onComplete }: Props) {
 
       const profile = await upsertProfile(authData.user.id, data);
       onComplete(profile);
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+    } catch (err: any) {
+      setError(err?.message || String(err) || 'Something went wrong. Please try again.');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-surface flex items-center justify-center p-4">
       <div className="w-full max-w-lg">
         <div className="mb-10 text-center">
           <div className="inline-flex items-center gap-2 mb-6">
-            <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
                 <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
               </svg>
             </div>
-            <span className="text-white font-semibold text-lg tracking-tight">FormIQ</span>
+            <span className="text-text-main font-semibold text-lg tracking-tight">FormIQ</span>
           </div>
           <div className="flex items-center justify-center gap-2 mb-2">
             {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
@@ -94,15 +94,15 @@ export default function OnboardingFlow({ onComplete }: Props) {
                 className="h-1 rounded-full transition-all duration-500"
                 style={{
                   width: i + 1 === step ? '32px' : '8px',
-                  backgroundColor: i + 1 <= step ? '#10b981' : '#2a2a2a',
+                  backgroundColor: i + 1 <= step ? '#475569' : '#e5e7eb',
                 }}
               />
             ))}
           </div>
-          <p className="text-[#6b7280] text-sm">Step {step} of {TOTAL_STEPS}</p>
+          <p className="text-text-muted text-sm">Step {step} of {TOTAL_STEPS}</p>
         </div>
 
-        <div className="bg-[#111111] border border-[#2a2a2a] rounded-2xl p-8 shadow-2xl">
+        <div className="bg-panel border border-border rounded-2xl p-8 shadow-2xl">
           {step === 1 && <StepAccount data={data} update={update} onNext={next} />}
           {step === 2 && <StepBasicInfo data={data} update={update} onNext={next} onBack={back} />}
           {step === 3 && <StepMeasurements data={data} update={update} onNext={next} onBack={back} />}

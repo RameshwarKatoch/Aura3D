@@ -54,7 +54,7 @@ export default function VoiceControl({ onCommand }: VoiceControlProps) {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
-            className="bg-[#161616] border border-[#1f1f1f] px-3 py-1.5 rounded-lg text-xs font-mono text-[#38B6FF]"
+            className="bg-panel border border-border px-3 py-1.5 rounded-lg text-xs font-mono text-primary shadow-sm"
           >
             "{transcript}"
           </motion.div>
@@ -62,7 +62,7 @@ export default function VoiceControl({ onCommand }: VoiceControlProps) {
       </AnimatePresence>
       <button
         onClick={startListening}
-        className={`p-2.5 rounded-full transition-all ${isListening ? 'bg-red-500 text-white animate-pulse' : 'bg-[#1f1f1f] text-[#6b7280] hover:text-white'}`}
+        className={`p-2.5 rounded-full transition-all border ${isListening ? 'bg-red-500 border-red-500 text-white animate-pulse' : 'bg-panel border-border text-text-muted hover:text-text-main hover:border-gray-300 shadow-sm'}`}
         title="Voice Commands (Try: 'Log Water' or 'Switch to Power Mode')"
       >
         {isListening ? <Loader2 className="animate-spin" size={18} /> : <Mic size={18} />}

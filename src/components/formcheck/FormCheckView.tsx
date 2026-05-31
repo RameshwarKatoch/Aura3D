@@ -367,8 +367,8 @@ export default function FormCheckView({ profile }: Props) {
               <Video className="text-primary" size={24} />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-white tracking-tight">AI Form Check</h1>
-              <p className="text-[#6b7280] text-sm flex items-center gap-2">
+              <h1 className="text-2xl font-bold text-text-main tracking-tight">AI Form Check</h1>
+              <p className="text-text-muted text-sm flex items-center gap-2">
                 <Activity size={14} className="text-green-500" />
                 Real-time Multi-Exercise Analysis Engine v3.0
               </p>
@@ -382,40 +382,40 @@ export default function FormCheckView({ profile }: Props) {
             <button
               onClick={() => setShowExercisePicker(p => !p)}
               disabled={isRecording}
-              className="flex items-center gap-2 bg-[#111111] border border-[#1f1f1f] hover:border-primary/40 rounded-xl px-4 py-2.5 text-white font-bold text-sm transition-all disabled:opacity-50"
+              className="flex items-center gap-2 bg-panel border border-border hover:border-primary/40 rounded-xl px-4 py-2.5 text-text-main font-bold text-sm transition-all disabled:opacity-50"
             >
               <span>{exerciseDef.emoji}</span>
               {exerciseDef.label}
-              <ChevronDown size={14} className="text-[#6b7280]" />
+              <ChevronDown size={14} className="text-text-muted" />
             </button>
             {showExercisePicker && (
-              <div className="absolute top-full mt-2 left-0 z-50 bg-[#111111] border border-[#1f1f1f] rounded-2xl p-2 min-w-[200px] shadow-2xl">
+              <div className="absolute top-full mt-2 left-0 z-50 bg-panel border border-border rounded-2xl p-2 min-w-[200px] shadow-2xl">
                 {EXERCISES.map(ex => (
                   <button
                     key={ex.id}
                     onClick={() => { setSelectedExercise(ex.id); setShowExercisePicker(false); }}
                     className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                      selectedExercise === ex.id ? 'bg-primary/20 text-primary' : 'text-[#9ca3af] hover:bg-white/5 hover:text-white'
+                      selectedExercise === ex.id ? 'bg-primary/20 text-primary' : 'text-text-muted hover:bg-surface hover:text-text-main'
                     }`}
                   >
                     <span>{ex.emoji}</span> {ex.label}
-                    <span className="ml-auto text-[10px] text-[#4b5563]">{ex.muscleGroup}</span>
+                    <span className="ml-auto text-[10px] text-text-muted">{ex.muscleGroup}</span>
                   </button>
                 ))}
               </div>
             )}
           </div>
 
-          <div className="flex items-center gap-2 bg-[#111111] border border-[#1f1f1f] rounded-xl px-3 py-2">
-            <span className="text-[#6b7280] text-xs font-bold uppercase tracking-widest">Weight</span>
+          <div className="flex items-center gap-2 bg-panel border border-border rounded-xl px-3 py-2">
+            <span className="text-text-muted text-xs font-bold uppercase tracking-widest">Weight</span>
             <input
               type="number"
               value={sessionWeight}
               onChange={(e) => setSessionWeight(e.target.value)}
-              className="w-16 bg-transparent text-white font-bold text-sm focus:outline-none"
+              className="w-16 bg-transparent text-text-main font-bold text-sm focus:outline-none"
               placeholder="0"
             />
-            <span className="text-[#6b7280] text-[10px] font-bold uppercase">KG</span>
+            <span className="text-text-muted text-[10px] font-bold uppercase">KG</span>
           </div>
 
           {!isRecording ? (
@@ -440,29 +440,29 @@ export default function FormCheckView({ profile }: Props) {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Main Viewport */}
         <div className="lg:col-span-3">
-          <div className="relative aspect-video bg-[#0d0d0d] rounded-[32px] overflow-hidden border border-[#1f1f1f] shadow-2xl group">
+          <div className="relative aspect-video bg-surface rounded-[32px] overflow-hidden border border-border shadow-2xl group">
             {!isReady && !error && (
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 z-20 bg-[#0d0d0d]">
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 z-20 bg-surface">
                 <div className="relative">
                   <div className="w-16 h-16 border-4 border-primary/20 rounded-full" />
                   <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin absolute top-0" />
                 </div>
-                <p className="text-[#6b7280] font-medium tracking-wide">Syncing AI Models...</p>
+                <p className="text-text-muted font-medium tracking-wide">Syncing AI Models...</p>
               </div>
             )}
 
             {error && (
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 z-20 bg-[#0d0d0d] p-12 text-center">
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 z-20 bg-surface p-12 text-center">
                 <div className="w-20 h-20 rounded-full bg-red-500/10 flex items-center justify-center">
                   <AlertCircle size={40} className="text-red-500" />
                 </div>
                 <div className="max-w-sm">
-                  <h3 className="text-white font-bold text-xl mb-2">Camera Access Denied</h3>
-                  <p className="text-[#6b7280] leading-relaxed">We need your camera to analyze your form. Please update your permissions in the browser address bar.</p>
+                  <h3 className="text-text-main font-bold text-xl mb-2">Camera Access Denied</h3>
+                  <p className="text-text-muted leading-relaxed">We need your camera to analyze your form. Please update your permissions in the browser address bar.</p>
                 </div>
                 <button 
                   onClick={() => window.location.reload()}
-                  className="bg-[#1f1f1f] text-white px-6 py-2.5 rounded-xl font-semibold hover:bg-[#2a2a2a] transition-all"
+                  className="bg-panel border border-border text-text-main px-6 py-2.5 rounded-xl font-semibold hover:bg-surface transition-all"
                 >
                   Retry Connection
                 </button>
@@ -476,19 +476,19 @@ export default function FormCheckView({ profile }: Props) {
             <div className="absolute inset-0 pointer-events-none p-8 flex flex-col justify-between">
               <div className="flex justify-between items-start">
                 <div className="flex flex-col gap-3">
-                  <div className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-5 min-w-[200px] shadow-2xl">
-                    <p className="text-[#6b7280] text-[10px] font-black uppercase tracking-[0.2em] mb-2">Repetition Counter</p>
+                  <div className="bg-panel/75 backdrop-blur-xl border border-border rounded-2xl p-5 min-w-[200px] shadow-2xl">
+                    <p className="text-text-muted text-[10px] font-black uppercase tracking-[0.2em] mb-2">Repetition Counter</p>
                     <div className="flex items-baseline gap-3">
-                      <span className="text-5xl font-black text-white tabular-nums">{metrics.repCount}</span>
+                      <span className="text-5xl font-black text-text-main tabular-nums">{metrics.repCount}</span>
                       <span className="text-primary font-bold text-sm">TOTAL REPS</span>
                     </div>
                   </div>
                   
-                  <div className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-5 shadow-2xl">
-                    <p className="text-[#6b7280] text-[10px] font-black uppercase tracking-[0.2em] mb-3">Live Status</p>
+                  <div className="bg-panel/75 backdrop-blur-xl border border-border rounded-2xl p-5 shadow-2xl">
+                    <p className="text-text-muted text-[10px] font-black uppercase tracking-[0.2em] mb-3">Live Status</p>
                     <div className="flex items-center gap-3">
                       <div className={`w-2 h-2 rounded-full ${isReady ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`} />
-                      <span className="text-white font-bold text-sm uppercase tracking-wide">
+                      <span className="text-text-main font-bold text-sm uppercase tracking-wide">
                         {calibrationStatus === 'waiting' ? 'Positioning...' : metrics.status}
                       </span>
                     </div>
@@ -496,29 +496,29 @@ export default function FormCheckView({ profile }: Props) {
                 </div>
 
                 {/* Depth Gauge */}
-                <div className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-4 flex flex-col items-center gap-4 shadow-2xl">
-                   <div className="h-48 w-4 bg-[#1a1a1a] rounded-full relative overflow-hidden">
+                <div className="bg-panel/75 backdrop-blur-xl border border-border rounded-2xl p-4 flex flex-col items-center gap-4 shadow-2xl">
+                   <div className="h-48 w-4 bg-surface border border-border rounded-full relative overflow-hidden">
                       <div 
                         className={`absolute bottom-0 w-full transition-all duration-200 rounded-full ${metrics.primaryAngle < 90 ? 'bg-green-500 shadow-[0_0_15px_rgba(34,197,94,0.6)]' : 'bg-primary'}`}
                         style={{ height: `${Math.max(5, (180 - metrics.primaryAngle) / 1.2)}%` }}
                       />
-                      <div className="absolute top-[50%] w-full h-[1px] bg-white/20" />
+                      <div className="absolute top-[50%] w-full h-[1px] bg-border" />
                    </div>
-                   <p className="text-[#6b7280] text-[10px] font-black uppercase vertical-rl tracking-widest">Range</p>
+                   <p className="text-text-muted text-[10px] font-black uppercase vertical-rl tracking-widest">Range</p>
                 </div>
               </div>
 
               <div className="flex justify-between items-end">
                 <div className="flex gap-4">
-                  <div className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-4 min-w-[140px] shadow-2xl">
-                    <p className="text-[#6b7280] text-[10px] font-bold uppercase tracking-widest mb-1">{metrics.primaryLabel}</p>
-                    <p className={`text-2xl font-black ${metrics.primaryAngle < 95 ? 'text-green-500' : 'text-white'}`}>
+                  <div className="bg-panel/75 backdrop-blur-xl border border-border rounded-2xl p-4 min-w-[140px] shadow-2xl">
+                    <p className="text-text-muted text-[10px] font-bold uppercase tracking-widest mb-1">{metrics.primaryLabel}</p>
+                    <p className={`text-2xl font-black ${metrics.primaryAngle < 95 ? 'text-green-500' : 'text-text-main'}`}>
                       {metrics.primaryAngle}°
                     </p>
                   </div>
-                  <div className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-4 min-w-[140px] shadow-2xl">
-                    <p className="text-[#6b7280] text-[10px] font-bold uppercase tracking-widest mb-1">{metrics.secondaryLabel}</p>
-                    <p className={`text-2xl font-black ${metrics.secondaryAngle > 40 ? 'text-yellow-500' : 'text-white'}`}>
+                  <div className="bg-panel/75 backdrop-blur-xl border border-border rounded-2xl p-4 min-w-[140px] shadow-2xl">
+                    <p className="text-text-muted text-[10px] font-bold uppercase tracking-widest mb-1">{metrics.secondaryLabel}</p>
+                    <p className={`text-2xl font-black ${metrics.secondaryAngle > 40 ? 'text-yellow-500' : 'text-text-main'}`}>
                       {metrics.secondaryAngle}°
                     </p>
                   </div>
@@ -535,13 +535,13 @@ export default function FormCheckView({ profile }: Props) {
 
             {/* Calibration Overlay */}
             {calibrationStatus === 'waiting' && isReady && (
-              <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-10 flex items-center justify-center">
+              <div className="absolute inset-0 bg-panel/75 backdrop-blur-sm z-10 flex items-center justify-center">
                  <div className="text-center animate-in fade-in zoom-in duration-500">
                     <div className="w-64 h-96 border-2 border-dashed border-primary/50 rounded-3xl mx-auto mb-6 flex items-center justify-center">
                        <Info className="text-primary/30" size={48} />
                     </div>
-                    <h3 className="text-white font-bold text-xl mb-2">Step into Frame</h3>
-                    <p className="text-[#6b7280] max-w-[240px] mx-auto text-sm">Please position yourself sideways so your full body is visible.</p>
+                    <h3 className="text-text-main font-bold text-xl mb-2">Step into Frame</h3>
+                    <p className="text-text-muted max-w-[240px] mx-auto text-sm">Please position yourself sideways so your full body is visible.</p>
                  </div>
               </div>
             )}
@@ -550,52 +550,60 @@ export default function FormCheckView({ profile }: Props) {
 
         {/* Sidebar Analytics */}
         <div className="space-y-6">
-          <div className="bg-[#111111] border border-[#1f1f1f] rounded-[32px] p-6 shadow-xl">
-            <h3 className="text-white font-bold flex items-center gap-2 mb-6">
+          <div className="bg-panel border border-border rounded-[32px] p-6 shadow-xl">
+            <h3 className="text-text-main font-bold flex items-center gap-2 mb-6">
               <MessageSquare size={18} className="text-primary" />
               Live Bio-Coach
             </h3>
             
             <div className="space-y-4">
-              {/* Depth Feedback */}
-              <div className="bg-[#161616] border border-[#1f1f1f] rounded-2xl p-4">
+              {/* Primary Metric Feedback */}
+              <div className="bg-surface border border-border rounded-2xl p-4">
                 <div className="flex items-start gap-3">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${metrics.kneeAngle < 95 ? 'bg-green-500/10' : 'bg-yellow-500/10'}`}>
-                    {metrics.kneeAngle < 95
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${metrics.primaryAngle < 95 ? 'bg-green-500/10' : 'bg-yellow-500/10'}`}>
+                    {metrics.primaryAngle < 95
                       ? <CheckCircle2 size={16} className="text-green-500" />
                       : <Info size={16} className="text-yellow-500" />}
                   </div>
                   <div>
-                    <p className="text-white text-sm font-bold mb-1">Squat Depth</p>
-                    <p className="text-[#6b7280] text-xs leading-relaxed">
-                      {metrics.kneeAngle < 95
-                        ? `Great depth! Knee angle at ${metrics.kneeAngle}° — hitting parallel. Keep driving through your heels.`
-                        : metrics.kneeAngle < 130
-                        ? `Getting there. Knee angle at ${metrics.kneeAngle}°. Try to go a little deeper — aim for 90°.`
-                        : `Knee angle is ${metrics.kneeAngle}°. Stand in frame and begin your squat.`}
+                    <p className="text-text-main text-sm font-bold mb-1">{metrics.primaryLabel}</p>
+                    <p className="text-text-muted text-xs leading-relaxed">
+                      {selectedExercise === 'squat' ? (
+                        metrics.primaryAngle < 95
+                          ? `Great depth! Knee angle at ${metrics.primaryAngle}° — hitting parallel. Keep driving through your heels.`
+                          : metrics.primaryAngle < 130
+                          ? `Getting there. Knee angle at ${metrics.primaryAngle}°. Try to go a little deeper — aim for 90°.`
+                          : `Knee angle is ${metrics.primaryAngle}°. Stand in frame and begin your squat.`
+                      ) : (
+                        `Range: ${metrics.primaryAngle}°. Current status: ${metrics.status}`
+                      )}
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Back Angle Feedback */}
-              <div className="bg-[#161616] border border-[#1f1f1f] rounded-2xl p-4">
+              {/* Secondary Metric Feedback */}
+              <div className="bg-surface border border-border rounded-2xl p-4">
                 <div className="flex items-start gap-3">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${metrics.backAngle > 45 ? 'bg-red-500/10' : metrics.backAngle > 30 ? 'bg-yellow-500/10' : 'bg-green-500/10'}`}>
-                    {metrics.backAngle > 45
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${metrics.secondaryAngle > 45 ? 'bg-red-500/10' : metrics.secondaryAngle > 30 ? 'bg-yellow-500/10' : 'bg-green-500/10'}`}>
+                    {metrics.secondaryAngle > 45
                       ? <AlertCircle size={16} className="text-red-500" />
-                      : metrics.backAngle > 30
+                      : metrics.secondaryAngle > 30
                       ? <Info size={16} className="text-yellow-500" />
                       : <CheckCircle2 size={16} className="text-green-500" />}
                   </div>
                   <div>
-                    <p className="text-white text-sm font-bold mb-1">Torso / Back Angle</p>
-                    <p className="text-[#6b7280] text-xs leading-relaxed">
-                      {metrics.backAngle > 45
-                        ? `⚠️ Torso is at ${metrics.backAngle}° — too far forward! Raise your chest and brace your core.`
-                        : metrics.backAngle > 30
-                        ? `Torso at ${metrics.backAngle}°. Slightly forward — try to keep a more upright posture.`
-                        : `Back angle at ${metrics.backAngle}° — looking great! Upright chest, solid position.`}
+                    <p className="text-text-main text-sm font-bold mb-1">{metrics.secondaryLabel}</p>
+                    <p className="text-text-muted text-xs leading-relaxed">
+                      {selectedExercise === 'squat' ? (
+                        metrics.secondaryAngle > 45
+                          ? `⚠️ Torso is at ${metrics.secondaryAngle}° — too far forward! Raise your chest and brace your core.`
+                          : metrics.secondaryAngle > 30
+                          ? `Torso at ${metrics.secondaryAngle}°. Slightly forward — try to keep a more upright posture.`
+                          : `Back angle at ${metrics.secondaryAngle}° — looking great! Upright chest, solid position.`
+                      ) : (
+                        `Angle: ${metrics.secondaryAngle}° (${metrics.secondaryLabel}).`
+                      )}
                     </p>
                   </div>
                 </div>
@@ -603,49 +611,49 @@ export default function FormCheckView({ profile }: Props) {
             </div>
 
             {/* Session Score — live calculation */}
-            <div className="mt-8 pt-6 border-t border-[#1f1f1f]">
+            <div className="mt-8 pt-6 border-t border-border">
                <div className="flex items-center justify-between mb-4">
-                  <span className="text-[#6b7280] text-xs font-bold uppercase tracking-widest">Session Score</span>
-                  <span className="text-primary font-black text-xl">
+                  <span className="text-text-muted text-xs font-bold uppercase tracking-widest">Session Score</span>
+                  <span className="text-text-main font-black text-xl">
                     {Math.max(0, Math.min(100, Math.round(
                       100 
-                      - (Math.max(0, metrics.backAngle - 20) * 0.8) // penalize for excess lean
-                      - (Math.max(0, metrics.kneeAngle - 95) * 0.3) // penalize for not going deep
+                      - (Math.max(0, metrics.secondaryAngle - 20) * 0.8) // penalize for excess lean
+                      - (Math.max(0, metrics.primaryAngle - 95) * 0.3) // penalize for not going deep
                     )))}
                     /100
                   </span>
                </div>
-               <div className="w-full h-2 bg-[#1a1a1a] rounded-full overflow-hidden">
+               <div className="w-full h-2 bg-surface border border-border rounded-full overflow-hidden">
                   <div 
                     className="h-full bg-primary transition-all duration-500"
                     style={{ width: `${Math.max(0, Math.min(100, Math.round(
                       100 
-                      - (Math.max(0, metrics.backAngle - 20) * 0.8)
-                      - (Math.max(0, metrics.kneeAngle - 95) * 0.3)
+                      - (Math.max(0, metrics.secondaryAngle - 20) * 0.8)
+                      - (Math.max(0, metrics.primaryAngle - 95) * 0.3)
                     )))}%`}}
                   />
                </div>
                {metrics.repCount > 0 && (
-                 <p className="text-[#6b7280] text-xs mt-3 text-center">
+                 <p className="text-text-muted text-xs mt-3 text-center">
                    {metrics.repCount} rep{metrics.repCount !== 1 ? 's' : ''} logged this set 🔥
                  </p>
                )}
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-primary/10 to-transparent border border-primary/20 rounded-[32px] p-6">
-            <h3 className="text-white font-bold flex items-center gap-2 mb-4">
+          <div className="bg-surface border border-border rounded-[32px] p-6">
+            <h3 className="text-text-main font-bold flex items-center gap-2 mb-4">
               <Trophy size={18} className="text-primary" />
-              {metrics.backAngle > 45 ? '⚠️ Fix This First' : metrics.kneeAngle < 95 ? '🔥 Pro Tip' : '💡 Form Tip'}
+              {metrics.secondaryAngle > 45 ? '⚠️ Fix This First' : metrics.primaryAngle < 95 ? '🔥 Pro Tip' : '💡 Form Tip'}
             </h3>
-            <p className="text-[#9ca3af] text-sm leading-relaxed mb-4">
-              {metrics.backAngle > 45
+            <p className="text-text-muted text-sm leading-relaxed mb-4">
+              {metrics.secondaryAngle > 45
                 ? '"Chest up, brace your core like you\'re about to take a punch. A tight core keeps your torso upright through the whole lift."'
-                : metrics.kneeAngle > 130
+                : metrics.primaryAngle > 130
                 ? '"Imagine sitting back onto a low chair behind you. Let your hips drop straight down — this naturally increases depth."'
                 : '"Maintain consistent foot pressure. Imagining you\'re \'spreading the floor\' with your feet can dramatically improve stability and power transfer."'}
             </p>
-            <button className="w-full bg-white/5 hover:bg-white/10 text-white py-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2">
+            <button className="w-full bg-panel border border-border hover:bg-surface text-text-main py-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2">
               View Full Form Guide <ChevronRight size={14} />
             </button>
           </div>

@@ -127,21 +127,21 @@ export default function CommandPalette({
       onMouseDown={e => { if (e.target === e.currentTarget) close(); }}
     >
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" />
 
       {/* Palette */}
-      <div className="relative w-full max-w-xl mx-4 bg-[#111111] border border-[#2a2a2a] rounded-2xl shadow-[0_24px_80px_rgba(0,0,0,0.8)] overflow-hidden">
+      <div className="relative w-full max-w-xl mx-4 bg-panel border border-border rounded-2xl shadow-2xl overflow-hidden">
         {/* Search input */}
-        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-[#1f1f1f]">
-          <Search size={17} className="text-[#6b7280] flex-shrink-0" />
+        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-border">
+          <Search size={17} className="text-text-muted flex-shrink-0" />
           <input
             ref={inputRef}
             value={query}
             onChange={e => setQuery(e.target.value)}
             placeholder="Search commands, modes, navigate..."
-            className="flex-1 bg-transparent text-white text-sm placeholder-[#4b5563] focus:outline-none"
+            className="flex-1 bg-transparent text-text-main text-sm placeholder-text-muted focus:outline-none"
           />
-          <kbd className="hidden sm:flex items-center gap-1 px-2 py-1 bg-[#1a1a1a] border border-[#2a2a2a] rounded text-[10px] text-[#6b7280] font-mono">
+          <kbd className="hidden sm:flex items-center gap-1 px-2 py-1 bg-surface border border-border rounded text-[10px] text-text-muted font-mono">
             ESC
           </kbd>
         </div>
@@ -150,13 +150,13 @@ export default function CommandPalette({
         <div className="max-h-[360px] overflow-y-auto py-2">
           {filtered.length === 0 ? (
             <div className="text-center py-10">
-              <p className="text-[#6b7280] text-sm">No commands found for "{query}"</p>
+              <p className="text-text-muted text-sm">No commands found for "{query}"</p>
             </div>
           ) : (
             Object.entries(grouped).map(([category, cmds]) => (
               <div key={category} className="mb-1">
                 <div className="px-4 py-1.5">
-                  <span className="text-[#4b5563] text-[10px] font-semibold uppercase tracking-widest">
+                  <span className="text-text-muted text-[10px] font-bold uppercase tracking-widest">
                     {category}
                   </span>
                 </div>
@@ -169,26 +169,26 @@ export default function CommandPalette({
                       onMouseEnter={() => setSelectedIdx(thisIdx)}
                       onClick={cmd.action}
                       className={`w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors ${
-                        isSelected ? 'bg-primary/10' : 'hover:bg-[#1a1a1a]'
+                        isSelected ? 'bg-primary/10' : 'hover:bg-surface'
                       }`}
                     >
                       <div className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                        isSelected ? 'bg-primary/20' : 'bg-[#1a1a1a]'
+                        isSelected ? 'bg-primary/20' : 'bg-surface'
                       }`}>
-                        <span className={isSelected ? 'text-primary' : 'text-[#6b7280]'}>
+                        <span className={isSelected ? 'text-primary' : 'text-text-muted'}>
                           {cmd.icon}
                         </span>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className={`text-sm font-medium truncate ${isSelected ? 'text-white' : 'text-[#d1d5db]'}`}>
+                        <p className={`text-sm font-semibold truncate ${isSelected ? 'text-text-main' : 'text-text-main/80'}`}>
                           {cmd.label}
                         </p>
                         {cmd.description && (
-                          <p className="text-[#6b7280] text-xs truncate">{cmd.description}</p>
+                          <p className="text-text-muted text-xs truncate">{cmd.description}</p>
                         )}
                       </div>
                       {isSelected && (
-                        <kbd className="hidden sm:flex items-center gap-1 px-2 py-1 bg-[#1a1a1a] border border-[#2a2a2a] rounded text-[10px] text-[#6b7280] font-mono flex-shrink-0">
+                        <kbd className="hidden sm:flex items-center gap-1 px-2 py-1 bg-surface border border-border rounded text-[10px] text-text-muted font-mono flex-shrink-0">
                           ↵
                         </kbd>
                       )}
@@ -201,15 +201,15 @@ export default function CommandPalette({
         </div>
 
         {/* Footer hint */}
-        <div className="border-t border-[#1f1f1f] px-4 py-2 flex items-center gap-4">
-          <span className="text-[#4b5563] text-[10px] flex items-center gap-1">
-            <kbd className="bg-[#1a1a1a] border border-[#2a2a2a] rounded px-1.5 py-0.5 font-mono">↑↓</kbd> navigate
+        <div className="border-t border-border px-4 py-2 flex items-center gap-4">
+          <span className="text-text-muted text-[10px] flex items-center gap-1">
+            <kbd className="bg-surface border border-border rounded px-1.5 py-0.5 font-mono">↑↓</kbd> navigate
           </span>
-          <span className="text-[#4b5563] text-[10px] flex items-center gap-1">
-            <kbd className="bg-[#1a1a1a] border border-[#2a2a2a] rounded px-1.5 py-0.5 font-mono">↵</kbd> select
+          <span className="text-text-muted text-[10px] flex items-center gap-1">
+            <kbd className="bg-surface border border-border rounded px-1.5 py-0.5 font-mono">↵</kbd> select
           </span>
-          <span className="text-[#4b5563] text-[10px] flex items-center gap-1">
-            <kbd className="bg-[#1a1a1a] border border-[#2a2a2a] rounded px-1.5 py-0.5 font-mono">Esc</kbd> close
+          <span className="text-text-muted text-[10px] flex items-center gap-1">
+            <kbd className="bg-surface border border-border rounded px-1.5 py-0.5 font-mono">Esc</kbd> close
           </span>
         </div>
       </div>

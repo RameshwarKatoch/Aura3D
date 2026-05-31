@@ -117,22 +117,22 @@ export default function OverloadTracker({ onSetsUpdate }: Props) {
   );
 
   return (
-    <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl overflow-hidden">
+    <div className="bg-panel border border-border rounded-2xl overflow-hidden shadow-sm">
       {/* Header */}
       <button
         onClick={() => setExpanded(e => !e)}
-        className="w-full flex items-center justify-between p-6 hover:bg-[#161616] transition-colors"
+        className="w-full flex items-center justify-between p-6 hover:bg-surface transition-colors"
       >
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
             <Dumbbell size={16} className="text-primary" />
           </div>
           <div className="text-left">
-            <h3 className="text-white font-semibold text-sm">Progress Overload Tracker</h3>
-            <p className="text-[#6b7280] text-xs">{todaySets.length} sets logged today</p>
+            <h3 className="text-text-main font-semibold text-sm">Progress Overload Tracker</h3>
+            <p className="text-text-muted text-xs">{todaySets.length} sets logged today</p>
           </div>
         </div>
-        {expanded ? <ChevronUp size={16} className="text-[#6b7280]" /> : <ChevronDown size={16} className="text-[#6b7280]" />}
+        {expanded ? <ChevronUp size={16} className="text-text-muted" /> : <ChevronDown size={16} className="text-text-muted" />}
       </button>
 
       {expanded && (
@@ -140,10 +140,10 @@ export default function OverloadTracker({ onSetsUpdate }: Props) {
           {/* PR Flash Banner */}
           {prFlash && (
             <div className="flex items-center gap-3 bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-3 animate-pulse">
-              <Trophy size={18} className="text-yellow-400 flex-shrink-0" />
+              <Trophy size={18} className="text-yellow-500 flex-shrink-0" />
               <div>
-                <p className="text-yellow-300 text-sm font-bold">🏆 New Personal Record!</p>
-                <p className="text-yellow-400/70 text-xs">{prFlash} — your best yet!</p>
+                <p className="text-yellow-700 text-sm font-bold">🏆 New Personal Record!</p>
+                <p className="text-yellow-600 text-xs font-semibold">{prFlash} — your best yet!</p>
               </div>
             </div>
           )}
@@ -151,14 +151,14 @@ export default function OverloadTracker({ onSetsUpdate }: Props) {
           {/* Log Form */}
           <div className="grid grid-cols-1 gap-3">
             <div>
-              <label className="text-[#6b7280] text-xs font-medium uppercase tracking-wider block mb-1.5">Exercise</label>
+              <label className="text-text-muted text-xs font-semibold uppercase tracking-wider block mb-1.5">Exercise</label>
               <select
                 value={selectedExercise}
                 onChange={e => setSelectedExercise(e.target.value)}
-                className="w-full bg-[#1a1a1a] border border-[#2a2a2a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-primary transition-colors appearance-none cursor-pointer"
+                className="w-full bg-surface border border-border rounded-xl px-3 py-2.5 text-text-main text-sm focus:outline-none focus:border-primary transition-colors appearance-none cursor-pointer"
               >
                 {EXERCISES.map(ex => (
-                  <option key={ex.name} value={ex.name} className="bg-[#1a1a1a]">
+                  <option key={ex.name} value={ex.name} className="bg-surface text-text-main">
                     {ex.name} ({ex.muscle})
                   </option>
                 ))}
@@ -167,24 +167,24 @@ export default function OverloadTracker({ onSetsUpdate }: Props) {
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="text-[#6b7280] text-xs font-medium uppercase tracking-wider block mb-1.5">Weight (kg)</label>
+                <label className="text-text-muted text-xs font-semibold uppercase tracking-wider block mb-1.5">Weight (kg)</label>
                 <input
                   type="number"
                   placeholder="e.g. 80"
                   value={weight}
                   onChange={e => setWeight(e.target.value)}
-                  className="w-full bg-[#1a1a1a] border border-[#2a2a2a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-primary transition-colors"
+                  className="w-full bg-surface border border-border rounded-xl px-3 py-2.5 text-text-main text-sm focus:outline-none focus:border-primary transition-colors"
                 />
               </div>
               <div>
-                <label className="text-[#6b7280] text-xs font-medium uppercase tracking-wider block mb-1.5">Reps</label>
+                <label className="text-text-muted text-xs font-semibold uppercase tracking-wider block mb-1.5">Reps</label>
                 <input
                   type="number"
                   placeholder="e.g. 8"
                   value={reps}
                   onChange={e => setReps(e.target.value)}
                   onKeyDown={e => e.key === 'Enter' && handleLog()}
-                  className="w-full bg-[#1a1a1a] border border-[#2a2a2a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-primary transition-colors"
+                  className="w-full bg-surface border border-border rounded-xl px-3 py-2.5 text-text-main text-sm focus:outline-none focus:border-primary transition-colors"
                 />
               </div>
             </div>
@@ -192,7 +192,7 @@ export default function OverloadTracker({ onSetsUpdate }: Props) {
             <button
               onClick={handleLog}
               style={{ backgroundColor: exerciseColor }}
-              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-white text-sm font-semibold transition-opacity hover:opacity-90"
+              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-white text-sm font-semibold transition-opacity hover:opacity-90 shadow-sm"
             >
               <Plus size={16} />
               Log Set
@@ -202,7 +202,7 @@ export default function OverloadTracker({ onSetsUpdate }: Props) {
           {/* Today's Sets */}
           {todaySets.length > 0 && (
             <div>
-              <h4 className="text-[#6b7280] text-xs font-semibold uppercase tracking-wider mb-3">Today's Logged Sets</h4>
+              <h4 className="text-text-muted text-xs font-semibold uppercase tracking-wider mb-3">Today's Logged Sets</h4>
               <div className="space-y-2 max-h-52 overflow-y-auto pr-1">
                 {todaySets.map(s => {
                   const pr = getPR(s.exercise);
@@ -211,7 +211,7 @@ export default function OverloadTracker({ onSetsUpdate }: Props) {
                   return (
                     <div
                       key={s.id}
-                      className="flex items-center justify-between bg-[#1a1a1a] border border-[#2a2a2a] rounded-xl px-3 py-2.5"
+                      className="flex items-center justify-between bg-surface border border-border rounded-xl px-3 py-2.5"
                     >
                       <div className="flex items-center gap-2.5">
                         <div
@@ -219,14 +219,14 @@ export default function OverloadTracker({ onSetsUpdate }: Props) {
                           style={{ backgroundColor: color }}
                         />
                         <div>
-                          <p className="text-white text-sm font-medium">{s.exercise}</p>
-                          <p className="text-[#6b7280] text-xs">{s.muscleGroup}</p>
+                          <p className="text-text-main text-sm font-semibold">{s.exercise}</p>
+                          <p className="text-text-muted text-xs font-medium">{s.muscleGroup}</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-white text-sm font-bold">{s.weight}kg × {s.reps}</span>
-                        {isCurrentPR && <Trophy size={14} className="text-yellow-400" />}
-                        {!isCurrentPR && s.weight > 0 && <Flame size={14} className="text-orange-400 opacity-60" />}
+                        <span className="text-text-main text-sm font-bold">{s.weight}kg × {s.reps}</span>
+                        {isCurrentPR && <Trophy size={14} className="text-yellow-500" />}
+                        {!isCurrentPR && s.weight > 0 && <Flame size={14} className="text-orange-500 opacity-60" />}
                       </div>
                     </div>
                   );

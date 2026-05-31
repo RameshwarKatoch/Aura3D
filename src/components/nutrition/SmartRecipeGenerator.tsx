@@ -177,8 +177,8 @@ export default function SmartRecipeGenerator({ dietaryPreference }: Props) {
   return (
     <div className="space-y-8">
       {/* Virtual Pantry Section */}
-      <section className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 overflow-hidden relative">
-        <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/20 rounded-full blur-[80px]" />
+      <section className="bg-panel border border-border rounded-3xl p-6 overflow-hidden relative shadow-sm">
+        <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/10 rounded-full blur-[80px]" />
         
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-6">
@@ -186,21 +186,21 @@ export default function SmartRecipeGenerator({ dietaryPreference }: Props) {
               <ChefHat className="text-primary w-6 h-6" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-white">Virtual Pantry</h2>
-              <p className="text-[#6b7280] text-sm">Add ingredients you have on hand</p>
+              <h2 className="text-xl font-bold text-text-main">Virtual Pantry</h2>
+              <p className="text-text-muted text-sm">Add ingredients you have on hand</p>
             </div>
           </div>
 
           <div className="flex gap-2 mb-6">
             <div className="relative flex-1">
-              <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#4b5563]" />
+              <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
               <input
                 type="text"
                 placeholder="Search ingredients (e.g. Chicken, Tofu, Spinach...)"
                 value={inputValue}
                 onChange={e => setInputValue(e.target.value)}
                 onKeyDown={e => e.key === 'Enter' && addIngredient()}
-                className="w-full bg-black/40 border border-white/10 rounded-2xl py-3 pl-12 pr-4 text-white placeholder-[#4b5563] focus:outline-none focus:border-primary/50 transition-all"
+                className="w-full bg-surface border border-border rounded-2xl py-3 pl-12 pr-4 text-text-main placeholder-text-muted focus:outline-none focus:border-primary/50 transition-all"
               />
             </div>
             <button 
@@ -220,12 +220,12 @@ export default function SmartRecipeGenerator({ dietaryPreference }: Props) {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
-                  className="flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full px-4 py-2 text-sm text-white group cursor-default transition-colors"
+                  className="flex items-center gap-2 bg-surface hover:bg-border border border-border rounded-full px-4 py-2 text-sm text-text-main group cursor-default transition-colors"
                 >
                   {ing}
                   <button 
                     onClick={() => removeIngredient(ing)}
-                    className="text-[#4b5563] hover:text-red-400 transition-colors"
+                    className="text-text-muted hover:text-red-500 transition-colors"
                   >
                     <X size={14} />
                   </button>
@@ -240,7 +240,7 @@ export default function SmartRecipeGenerator({ dietaryPreference }: Props) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="space-y-4">
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-white font-bold flex items-center gap-2">
+            <h3 className="text-text-main font-bold flex items-center gap-2">
               <Sparkles size={18} className="text-primary" />
               Suggested High-Protein Meals
             </h3>
@@ -262,38 +262,38 @@ export default function SmartRecipeGenerator({ dietaryPreference }: Props) {
                   onClick={() => setSelectedRecipe(recipe)}
                   className={`group relative p-4 rounded-2xl border transition-all cursor-pointer ${
                     selectedRecipe?.id === recipe.id 
-                      ? 'bg-primary/10 border-primary shadow-[0_0_20px_rgba(45,91,255,0.1)]' 
-                      : 'bg-white/5 border-white/5 hover:border-white/20'
+                      ? 'bg-primary/10 border-primary shadow-[0_0_20px_rgba(71,85,105,0.08)]' 
+                      : 'bg-panel border-border hover:border-primary/30'
                   }`}
                 >
                   <div className="flex items-center gap-4">
-                    <div className="text-2xl w-12 h-12 rounded-xl bg-black/40 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="text-2xl w-12 h-12 rounded-xl bg-surface border border-border flex items-center justify-center group-hover:scale-110 transition-transform">
                       {recipe.icon}
                     </div>
                     <div className="flex-1">
-                      <h4 className="text-white font-bold text-sm group-hover:text-primary transition-colors">{recipe.name}</h4>
+                      <h4 className="text-text-main font-bold text-sm group-hover:text-primary transition-colors">{recipe.name}</h4>
                       <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1">
                         <div className="flex items-center gap-1">
                           <Zap size={10} className="text-primary" />
-                          <span className="text-[10px] font-bold text-[#6b7280]">{recipe.macros.protein}g P</span>
+                          <span className="text-[10px] font-bold text-text-muted">{recipe.macros.protein}g P</span>
                         </div>
                         <div className="flex items-center gap-1">
-                          <Flame size={10} className="text-orange-400" />
-                          <span className="text-[10px] font-bold text-[#6b7280]">{recipe.macros.calories} kcal</span>
+                          <Flame size={10} className="text-orange-500" />
+                          <span className="text-[10px] font-bold text-text-muted">{recipe.macros.calories} kcal</span>
                         </div>
                         <div className="flex items-center gap-1">
-                          <Droplets size={10} className="text-blue-400" />
-                          <span className="text-[10px] font-bold text-[#6b7280]">{recipe.macros.carbs}g C</span>
+                          <Droplets size={10} className="text-blue-500" />
+                          <span className="text-[10px] font-bold text-text-muted">{recipe.macros.carbs}g C</span>
                         </div>
                         <div className="flex items-center gap-1">
-                          <Info size={10} className="text-yellow-400" />
-                          <span className="text-[10px] font-bold text-[#6b7280]">{recipe.macros.fat}g F</span>
+                          <Info size={10} className="text-yellow-500" />
+                          <span className="text-[10px] font-bold text-text-muted">{recipe.macros.fat}g F</span>
                         </div>
                       </div>
                     </div>
                     <div className="hidden xl:flex gap-1">
                       {recipe.ingredients.slice(0, 2).map(i => (
-                        <span key={i} className="text-[8px] px-1.5 py-0.5 rounded bg-white/5 text-[#4b5563] border border-white/5 whitespace-nowrap">
+                        <span key={i} className="text-[8px] px-1.5 py-0.5 rounded bg-surface text-text-muted border border-border whitespace-nowrap">
                           {i}
                         </span>
                       ))}
@@ -314,9 +314,9 @@ export default function SmartRecipeGenerator({ dietaryPreference }: Props) {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden h-full flex flex-col"
+                className="bg-panel border border-border rounded-3xl overflow-hidden h-full flex flex-col shadow-sm"
               >
-                <div className="h-[300px] bg-black/40 relative">
+                <div className="h-[300px] bg-surface border-b border-border relative">
                   <FoodPlate3D 
                     key={selectedRecipe.id}
                     proteinSource={selectedRecipe.proteinSource} 
@@ -327,7 +327,7 @@ export default function SmartRecipeGenerator({ dietaryPreference }: Props) {
                 <div className="p-6 flex-1 space-y-6">
                   <div className="flex justify-between items-start">
                     <div>
-                      <h3 className="text-2xl font-bold text-white">{selectedRecipe.name}</h3>
+                      <h3 className="text-2xl font-bold text-text-main">{selectedRecipe.name}</h3>
                       <p className="text-primary text-xs font-black uppercase tracking-[0.2em] mt-1">
                         High Protein Optimization
                       </p>
@@ -338,7 +338,7 @@ export default function SmartRecipeGenerator({ dietaryPreference }: Props) {
                   </div>
 
                   {/* Nutrition Label Style Macros */}
-                  <div className="bg-white text-black p-4 rounded-lg font-mono shadow-2xl">
+                  <div className="bg-white text-black p-4 rounded-lg font-mono shadow-2xl border border-border">
                     <div className="border-b-8 border-black pb-1 mb-1">
                       <h4 className="text-2xl font-black leading-none">Nutrition Facts</h4>
                     </div>
@@ -369,10 +369,10 @@ export default function SmartRecipeGenerator({ dietaryPreference }: Props) {
                   </div>
 
                   <div className="space-y-3">
-                    <h5 className="text-white text-[10px] font-black uppercase tracking-widest opacity-50">Ingredients Used</h5>
+                    <h5 className="text-text-muted text-[10px] font-black uppercase tracking-widest opacity-50">Ingredients Used</h5>
                     <div className="flex flex-wrap gap-2">
                       {selectedRecipe.ingredients.map(i => (
-                        <span key={i} className="px-3 py-1 bg-white/5 rounded-lg border border-white/5 text-xs text-[#9ca3af]">
+                        <span key={i} className="px-3 py-1 bg-surface rounded-lg border border-border text-xs text-text-muted">
                           {i}
                         </span>
                       ))}
@@ -385,12 +385,12 @@ export default function SmartRecipeGenerator({ dietaryPreference }: Props) {
                 </div>
               </motion.div>
             ) : (
-              <div className="bg-white/5 border border-dashed border-white/10 rounded-3xl h-[600px] flex flex-col items-center justify-center text-center p-8">
-                <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4">
-                  <ChefHat size={32} className="text-[#4b5563]" />
+              <div className="bg-panel border border-dashed border-border rounded-3xl h-[600px] flex flex-col items-center justify-center text-center p-8 shadow-sm">
+                <div className="w-16 h-16 rounded-full bg-surface flex items-center justify-center mb-4 border border-border">
+                  <ChefHat size={32} className="text-text-muted" />
                 </div>
-                <h4 className="text-white font-bold mb-2">Select a recipe to visualize</h4>
-                <p className="text-[#6b7280] text-sm max-w-[250px]">
+                <h4 className="text-text-main font-bold mb-2">Select a recipe to visualize</h4>
+                <p className="text-text-muted text-sm max-w-[250px]">
                   Pick one of the high-protein suggestions to see its macro breakdown and 3D plate.
                 </p>
               </div>

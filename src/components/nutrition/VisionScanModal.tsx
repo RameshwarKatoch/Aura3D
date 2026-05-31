@@ -117,22 +117,22 @@ export default function VisionScanModal({ isOpen, onClose, profile }: Props) {
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
       <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={onClose} />
       
-      <div className="relative w-full max-w-md bg-[#111111] border border-[#2a2a2a] rounded-3xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
+      <div className="relative w-full max-w-md bg-panel border border-border rounded-3xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
         
         {/* Header */}
-        <div className="flex items-center justify-between p-5 border-b border-[#1f1f1f]">
+        <div className="flex items-center justify-between p-5 border-b border-border">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
               <Camera size={18} className="text-primary" />
             </div>
             <div>
-              <h2 className="text-white font-bold">Vision Scan</h2>
-              <p className="text-[#6b7280] text-xs">AI Food Recognition</p>
+              <h2 className="text-text-main font-bold">Vision Scan</h2>
+              <p className="text-text-muted text-xs">AI Food Recognition</p>
             </div>
           </div>
           <button 
             onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded-full bg-[#1a1a1a] text-[#6b7280] hover:text-white hover:bg-[#2a2a2a] transition-colors"
+            className="w-8 h-8 flex items-center justify-center rounded-full bg-surface text-text-muted hover:text-text-main hover:bg-border transition-colors"
           >
             <X size={16} />
           </button>
@@ -146,25 +146,25 @@ export default function VisionScanModal({ isOpen, onClose, profile }: Props) {
               {!cameraActive ? (
                 <div className="w-full space-y-4">
                   <div 
-                    className="w-full aspect-video border-2 border-dashed border-[#2a2a2a] rounded-2xl flex flex-col items-center justify-center bg-[#161616] cursor-pointer hover:border-primary/50 transition-colors group"
+                    className="w-full aspect-video border-2 border-dashed border-border rounded-2xl flex flex-col items-center justify-center bg-surface cursor-pointer hover:border-primary/50 transition-colors group"
                     onClick={startCamera}
                   >
                     <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                       <Camera size={24} className="text-primary" />
                     </div>
-                    <p className="text-white font-medium mb-1">Open Live Scanner</p>
-                    <p className="text-[#6b7280] text-xs">Scan food in real-time</p>
+                    <p className="text-text-main font-medium mb-1">Open Live Scanner</p>
+                    <p className="text-text-muted text-xs">Scan food in real-time</p>
                   </div>
 
                   <div className="flex items-center gap-4">
-                    <div className="h-px flex-1 bg-[#1f1f1f]" />
-                    <span className="text-[#4b5563] text-[10px] font-black uppercase tracking-widest">or</span>
-                    <div className="h-px flex-1 bg-[#1f1f1f]" />
+                    <div className="h-px flex-1 bg-border" />
+                    <span className="text-text-muted text-[10px] font-black uppercase tracking-widest">or</span>
+                    <div className="h-px flex-1 bg-border" />
                   </div>
 
                   <button 
                     onClick={() => fileInputRef.current?.click()}
-                    className="w-full py-3 bg-[#161616] border border-[#1f1f1f] rounded-xl text-white text-sm font-bold flex items-center justify-center gap-2 hover:bg-[#1f1f1f] transition-all"
+                    className="w-full py-3 bg-surface border border-border rounded-xl text-text-main text-sm font-bold flex items-center justify-center gap-2 hover:bg-border transition-all"
                   >
                     <Upload size={16} className="text-primary" />
                     Upload from Gallery
@@ -172,7 +172,7 @@ export default function VisionScanModal({ isOpen, onClose, profile }: Props) {
                 </div>
               ) : (
                 <div className="w-full space-y-6">
-                  <div className="relative aspect-video bg-black rounded-2xl overflow-hidden border border-primary/30">
+                  <div className="relative aspect-video bg-surface rounded-2xl overflow-hidden border border-primary/30">
                     <video 
                       ref={videoRef} 
                       autoPlay 
@@ -192,7 +192,7 @@ export default function VisionScanModal({ isOpen, onClose, profile }: Props) {
                     </button>
                     <button 
                       onClick={stopCamera}
-                      className="text-[#6b7280] text-xs font-bold uppercase hover:text-white transition-colors"
+                      className="text-text-muted text-xs font-bold uppercase hover:text-text-main transition-colors"
                     >
                       Cancel
                     </button>
@@ -213,15 +213,15 @@ export default function VisionScanModal({ isOpen, onClose, profile }: Props) {
           {scanState === 'scanning' && (
             <div className="flex flex-col items-center justify-center py-16">
               <div className="relative w-24 h-24 mb-6">
-                <div className="absolute inset-0 rounded-2xl border-4 border-[#1f1f1f]" />
+                <div className="absolute inset-0 rounded-2xl border-4 border-border" />
                 <div className="absolute inset-0 rounded-2xl border-4 border-primary border-t-transparent animate-spin" />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <Camera size={28} className="text-[#6b7280] animate-pulse" />
+                  <Camera size={28} className="text-text-muted animate-pulse" />
                 </div>
                 <div className="absolute -inset-4 bg-primary/20 blur-xl rounded-full animate-pulse opacity-50" />
               </div>
-              <p className="text-white font-medium animate-pulse">Analyzing image...</p>
-              <p className="text-[#6b7280] text-sm mt-1">Identifying ingredients and calculating macros</p>
+              <p className="text-text-main font-medium animate-pulse">Analyzing image...</p>
+              <p className="text-text-muted text-sm mt-1">Identifying ingredients and calculating macros</p>
             </div>
           )}
 
@@ -234,7 +234,7 @@ export default function VisionScanModal({ isOpen, onClose, profile }: Props) {
                   <AlertTriangle size={20} className="text-red-500 flex-shrink-0 mt-0.5" />
                   <div>
                     <h4 className="text-red-500 font-bold text-sm">Dietary Mismatch Detected</h4>
-                    <p className="text-red-400/80 text-xs mt-1 leading-relaxed">
+                    <p className="text-red-600 text-xs mt-1 leading-relaxed">
                       This item appears to contain meat, but your profile is set to <strong>{profile.dietary_preference === 'veg' ? 'Vegetarian' : 'Vegan'} Mode</strong>.
                     </p>
                   </div>
@@ -242,40 +242,40 @@ export default function VisionScanModal({ isOpen, onClose, profile }: Props) {
               )}
 
               {/* Result Card */}
-              <div className="bg-[#161616] border border-[#1f1f1f] rounded-2xl p-5 mb-6 text-center relative overflow-hidden">
+              <div className="bg-surface border border-border rounded-2xl p-5 mb-6 text-center relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-purple-500" />
-                <p className="text-[#6b7280] text-xs font-semibold tracking-wider uppercase mb-1">Identified Food</p>
-                <h3 className="text-2xl font-bold text-white">{result.name}</h3>
+                <p className="text-text-muted text-xs font-semibold tracking-wider uppercase mb-1">Identified Food</p>
+                <h3 className="text-2xl font-bold text-text-main">{result.name}</h3>
               </div>
 
               {/* Macro Inputs */}
               <div className="grid grid-cols-2 gap-4 mb-8">
                 <div>
-                  <label className="flex items-center gap-1.5 text-[#6b7280] text-xs font-medium uppercase tracking-wider mb-2">
-                    <Flame size={14} className="text-orange-400" /> Calories
+                  <label className="flex items-center gap-1.5 text-text-muted text-xs font-medium uppercase tracking-wider mb-2">
+                    <Flame size={14} className="text-orange-500" /> Calories
                   </label>
                   <div className="relative">
                     <input 
                       type="number" 
                       value={result.calories}
                       readOnly
-                      className="w-full bg-[#1a1a1a] border border-[#2a2a2a] rounded-xl px-4 py-3 text-white font-semibold focus:outline-none"
+                      className="w-full bg-surface border border-border rounded-xl px-4 py-3 text-text-main font-semibold focus:outline-none"
                     />
-                    <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[#6b7280] text-sm">kcal</span>
+                    <span className="absolute right-4 top-1/2 -translate-y-1/2 text-text-muted text-sm">kcal</span>
                   </div>
                 </div>
                 <div>
-                  <label className="flex items-center gap-1.5 text-[#6b7280] text-xs font-medium uppercase tracking-wider mb-2">
-                    <Target size={14} className="text-blue-400" /> Protein
+                  <label className="flex items-center gap-1.5 text-text-muted text-xs font-medium uppercase tracking-wider mb-2">
+                    <Target size={14} className="text-blue-500" /> Protein
                   </label>
                   <div className="relative">
                     <input 
                       type="number" 
                       value={result.protein}
                       readOnly
-                      className="w-full bg-[#1a1a1a] border border-[#2a2a2a] rounded-xl px-4 py-3 text-white font-semibold focus:outline-none"
+                      className="w-full bg-surface border border-border rounded-xl px-4 py-3 text-text-main font-semibold focus:outline-none"
                     />
-                    <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[#6b7280] text-sm">g</span>
+                    <span className="absolute right-4 top-1/2 -translate-y-1/2 text-text-muted text-sm">g</span>
                   </div>
                 </div>
               </div>
@@ -294,8 +294,8 @@ export default function VisionScanModal({ isOpen, onClose, profile }: Props) {
               <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mb-4">
                 <CheckCircle size={40} className="text-green-500" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Meal Logged!</h3>
-              <p className="text-[#6b7280] text-sm text-center">Your macros have been updated.</p>
+              <h3 className="text-xl font-bold text-text-main mb-2">Meal Logged!</h3>
+              <p className="text-text-muted text-sm text-center">Your macros have been updated.</p>
             </div>
           )}
 

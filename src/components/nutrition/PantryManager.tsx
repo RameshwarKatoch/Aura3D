@@ -11,8 +11,8 @@ export default function PantryManager() {
   return (
     <div className="max-w-5xl mx-auto py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-black text-white tracking-tight">Pantry Management</h1>
-        <p className="text-[#6b7280] text-sm mt-1">Manage your ingredients and generate high-protein meals</p>
+        <h1 className="text-3xl font-black text-text-main tracking-tight">Pantry Management</h1>
+        <p className="text-text-muted text-sm mt-1">Manage your ingredients and generate high-protein meals</p>
       </div>
       
       <SmartRecipeGenerator dietaryPreference={dietaryPreference} />

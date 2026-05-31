@@ -89,7 +89,7 @@ export default function RestTimer({ externalStart, onStarted }: Props) {
   const strokeColor = isDone
     ? '#10b981'
     : pct > 0.5
-    ? '#0070FF'
+    ? '#475569'
     : pct > 0.2
     ? '#f59e0b'
     : '#ef4444';
@@ -107,25 +107,25 @@ export default function RestTimer({ externalStart, onStarted }: Props) {
         /* Minimized pill */
         <button
           onClick={() => setMinimized(false)}
-          className="flex items-center gap-2 bg-[#111111] border border-[#1f1f1f] rounded-full px-4 py-2.5 shadow-2xl hover:border-primary/50 transition-colors"
+          className="flex items-center gap-2 bg-panel border border-border rounded-full px-4 py-2.5 shadow-2xl hover:border-primary/50 transition-colors"
         >
           <div
             className="w-2 h-2 rounded-full"
             style={{ backgroundColor: strokeColor }}
           />
-          <span className="text-white text-sm font-mono font-bold">{mm}:{ss}</span>
-          <ChevronUp size={14} className="text-[#6b7280]" />
+          <span className="text-text-main text-sm font-mono font-bold">{mm}:{ss}</span>
+          <ChevronUp size={14} className="text-text-muted" />
         </button>
       ) : (
         /* Full widget */
-        <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl shadow-2xl p-5 w-[220px]">
+        <div className="bg-panel border border-border rounded-2xl shadow-2xl p-5 w-[220px]">
           {/* Header */}
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <Timer size={15} className="text-primary" />
-              <span className="text-white text-xs font-semibold">Rest Timer</span>
+              <span className="text-text-main text-xs font-semibold">Rest Timer</span>
             </div>
-            <button onClick={() => setMinimized(true)} className="text-[#6b7280] hover:text-white transition-colors">
+            <button onClick={() => setMinimized(true)} className="text-text-muted hover:text-text-main transition-colors">
               <X size={14} />
             </button>
           </div>
@@ -134,7 +134,7 @@ export default function RestTimer({ externalStart, onStarted }: Props) {
           <div className="flex justify-center mb-4">
             <div className="relative w-[90px] h-[90px]">
               <svg className="w-full h-full -rotate-90" viewBox="0 0 90 90">
-                <circle cx="45" cy="45" r={radius} fill="none" stroke="#1f1f1f" strokeWidth="6" />
+                <circle cx="45" cy="45" r={radius} fill="none" stroke="#e5e7eb" strokeWidth="6" />
                 <circle
                   cx="45" cy="45" r={radius}
                   fill="none"
@@ -147,7 +147,7 @@ export default function RestTimer({ externalStart, onStarted }: Props) {
                 />
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-white text-xl font-mono font-bold leading-none">
+                <span className="text-text-main text-xl font-mono font-bold leading-none">
                   {mm}:{ss}
                 </span>
                 {isDone && <span className="text-[#10b981] text-[10px] font-semibold mt-0.5">Done!</span>}
@@ -164,7 +164,7 @@ export default function RestTimer({ externalStart, onStarted }: Props) {
                 className={`flex-1 text-[10px] py-1 rounded-lg font-semibold transition-all ${
                   duration === p && !running
                     ? 'bg-primary text-white'
-                    : 'bg-[#1a1a1a] text-[#6b7280] hover:text-white'
+                    : 'bg-surface text-text-muted hover:text-text-main'
                 }`}
               >
                 {p < 60 ? `${p}s` : `${p / 60}m`}
@@ -185,14 +185,14 @@ export default function RestTimer({ externalStart, onStarted }: Props) {
             ) : (
               <button
                 onClick={() => setRunning(false)}
-                className="flex-1 flex items-center justify-center gap-1.5 bg-[#1a1a1a] text-white py-2 rounded-xl text-xs font-semibold hover:bg-[#2a2a2a] transition-colors"
+                className="flex-1 flex items-center justify-center gap-1.5 bg-surface text-text-main py-2 rounded-xl text-xs font-semibold hover:bg-border transition-colors border border-border"
               >
                 <Pause size={12} /> Pause
               </button>
             )}
             <button
               onClick={handleReset}
-              className="p-2 rounded-xl bg-[#1a1a1a] text-[#6b7280] hover:text-white hover:bg-[#2a2a2a] transition-colors"
+              className="p-2 rounded-xl bg-surface text-text-muted hover:text-text-main hover:bg-border transition-colors border border-border"
             >
               <RotateCcw size={14} />
             </button>
@@ -200,7 +200,7 @@ export default function RestTimer({ externalStart, onStarted }: Props) {
 
           {/* Notification tip */}
           {notifPermission !== 'granted' && (
-            <p className="text-[#4b5563] text-[9px] text-center mt-3 leading-tight">
+            <p className="text-text-muted text-[9px] text-center mt-3 leading-tight font-medium">
               Allow notifications to get alerted when rest is complete
             </p>
           )}

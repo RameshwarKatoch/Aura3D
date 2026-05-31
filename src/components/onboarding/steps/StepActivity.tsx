@@ -18,8 +18,8 @@ const levels: { value: ActivityLevel; label: string; description: string; icon: 
 export default function StepActivity({ data, update, onNext, onBack }: Props) {
   return (
     <div>
-      <h2 className="text-2xl font-bold text-white mb-1">Activity level</h2>
-      <p className="text-[#6b7280] mb-8 text-sm">This determines your daily caloric expenditure (TDEE).</p>
+      <h2 className="text-2xl font-bold text-text-main mb-1">Activity level</h2>
+      <p className="text-text-muted mb-8 text-sm">This determines your daily caloric expenditure (TDEE).</p>
 
       <div className="space-y-2">
         {levels.map(level => (
@@ -28,21 +28,21 @@ export default function StepActivity({ data, update, onNext, onBack }: Props) {
             onClick={() => update({ activity_level: level.value })}
             className={`w-full flex items-center gap-4 py-3.5 px-4 rounded-xl text-left transition-all duration-200 border ${
               data.activity_level === level.value
-                ? 'bg-emerald-500/10 border-emerald-500'
-                : 'bg-[#1a1a1a] border-[#2a2a2a] hover:border-[#3a3a3a]'
+                ? 'bg-primary/10 border-primary'
+                : 'bg-surface border-border hover:border-gray-300'
             }`}
           >
             <span className="text-xl w-8 flex-shrink-0">{level.icon}</span>
             <div className="flex-1 min-w-0">
-              <p className={`font-medium text-sm ${data.activity_level === level.value ? 'text-white' : 'text-[#9ca3af]'}`}>
+              <p className={`font-semibold text-sm ${data.activity_level === level.value ? 'text-text-main' : 'text-text-muted'}`}>
                 {level.label}
               </p>
-              <p className="text-[#4b5563] text-xs mt-0.5">{level.description}</p>
+              <p className="text-text-muted text-xs mt-0.5">{level.description}</p>
             </div>
             {data.activity_level === level.value && (
-              <div className="w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0">
+              <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
                 <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-                  <path d="M2 6l3 3 5-5" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M2 6l3 3 5-5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
             )}
@@ -53,13 +53,13 @@ export default function StepActivity({ data, update, onNext, onBack }: Props) {
       <div className="flex gap-3 mt-8">
         <button
           onClick={onBack}
-          className="flex-1 bg-[#1a1a1a] border border-[#2a2a2a] hover:border-[#3a3a3a] text-[#9ca3af] font-semibold py-3.5 rounded-xl transition-all duration-200"
+          className="flex-1 bg-surface border border-border hover:bg-gray-100 text-text-main font-semibold py-3.5 rounded-xl transition-all duration-200"
         >
           Back
         </button>
         <button
           onClick={onNext}
-          className="flex-[2] bg-emerald-500 hover:bg-emerald-400 text-black font-semibold py-3.5 rounded-xl transition-all duration-200 active:scale-[0.98]"
+          className="flex-[2] bg-primary hover:bg-primary/95 text-white font-semibold py-3.5 rounded-xl transition-all duration-200 active:scale-[0.98]"
         >
           Continue
         </button>

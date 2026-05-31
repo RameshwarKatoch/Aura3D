@@ -62,14 +62,14 @@ export default function PredictiveAnalytics({ profile, onSimulationChange }: Pro
   }, [profile.weight_kg, simulation.weightChange]);
 
   return (
-    <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-6 h-full">
+    <div className="bg-panel border border-border rounded-2xl p-6 h-full shadow-sm">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-white font-bold text-lg flex items-center gap-2">
-            <TrendingUp className="w-5 h-5 text-[#2D5BFF]" />
+          <h3 className="text-text-main font-bold text-lg flex items-center gap-2">
+            <TrendingUp className="w-5 h-5 text-primary" />
             Predictive Health Twin
           </h3>
-          <p className="text-[#6b7280] text-sm">30-day "What-If" simulator</p>
+          <p className="text-text-muted text-sm">30-day "What-If" simulator</p>
         </div>
         <div className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5 ${
           simulation.burnoutRisk === 'high' ? 'bg-red-500/20 text-red-500 border border-red-500/30' :
@@ -86,8 +86,8 @@ export default function PredictiveAnalytics({ profile, onSimulationChange }: Pro
         <div className="space-y-4">
           <div>
             <div className="flex justify-between mb-2">
-              <span className="text-[#9ca3af] text-xs font-medium">Workout Consistency</span>
-              <span className="text-white text-xs font-bold">{consistency}%</span>
+              <span className="text-text-muted text-xs font-medium">Workout Consistency</span>
+              <span className="text-text-main text-xs font-bold">{consistency}%</span>
             </div>
             <input
               type="range"
@@ -95,14 +95,14 @@ export default function PredictiveAnalytics({ profile, onSimulationChange }: Pro
               max="100"
               value={consistency}
               onChange={(e) => setConsistency(parseInt(e.target.value))}
-              className="w-full h-1.5 bg-[#1f1f1f] rounded-lg appearance-none cursor-pointer accent-[#2D5BFF]"
+              className="w-full h-1.5 bg-border rounded-lg appearance-none cursor-pointer accent-primary"
             />
           </div>
 
           <div>
             <div className="flex justify-between mb-2">
-              <span className="text-[#9ca3af] text-xs font-medium">Extra Daily Calories</span>
-              <span className="text-white text-xs font-bold">+{extraCalories} kcal</span>
+              <span className="text-text-muted text-xs font-medium">Extra Daily Calories</span>
+              <span className="text-text-main text-xs font-bold">+{extraCalories} kcal</span>
             </div>
             <input
               type="range"
@@ -111,14 +111,14 @@ export default function PredictiveAnalytics({ profile, onSimulationChange }: Pro
               step="50"
               value={extraCalories}
               onChange={(e) => setExtraCalories(parseInt(e.target.value))}
-              className="w-full h-1.5 bg-[#1f1f1f] rounded-lg appearance-none cursor-pointer accent-[#FF3131]"
+              className="w-full h-1.5 bg-border rounded-lg appearance-none cursor-pointer accent-red-500"
             />
           </div>
 
           <div>
             <div className="flex justify-between mb-2">
-              <span className="text-[#9ca3af] text-xs font-medium">Training Intensity</span>
-              <span className="text-white text-xs font-bold">{intensity}%</span>
+              <span className="text-text-muted text-xs font-medium">Training Intensity</span>
+              <span className="text-text-main text-xs font-bold">{intensity}%</span>
             </div>
             <input
               type="range"
@@ -126,28 +126,28 @@ export default function PredictiveAnalytics({ profile, onSimulationChange }: Pro
               max="100"
               value={intensity}
               onChange={(e) => setIntensity(parseInt(e.target.value))}
-              className="w-full h-1.5 bg-[#1f1f1f] rounded-lg appearance-none cursor-pointer accent-[#38B6FF]"
+              className="w-full h-1.5 bg-border rounded-lg appearance-none cursor-pointer accent-secondary"
             />
           </div>
         </div>
 
         {/* Impact Cards */}
         <div className="grid grid-cols-2 gap-3">
-          <div className="bg-[#0a0a0a] border border-[#1f1f1f] rounded-xl p-3">
+          <div className="bg-surface border border-border rounded-xl p-3">
             <div className="flex items-center gap-2 mb-1">
-              <Activity className="w-3.5 h-3.5 text-[#2D5BFF]" />
-              <span className="text-[#6b7280] text-[10px] uppercase font-bold">30d Weight</span>
+              <Activity className="w-3.5 h-3.5 text-primary" />
+              <span className="text-text-muted text-[10px] uppercase font-bold">30d Weight</span>
             </div>
             <p className={`text-lg font-black ${simulation.weightChange > 0 ? 'text-red-500' : 'text-green-500'}`}>
               {simulation.weightChange > 0 ? '+' : ''}{simulation.weightChange}kg
             </p>
           </div>
-          <div className="bg-[#0a0a0a] border border-[#1f1f1f] rounded-xl p-3">
+          <div className="bg-surface border border-border rounded-xl p-3">
             <div className="flex items-center gap-2 mb-1">
-              <Target className="w-3.5 h-3.5 text-[#38B6FF]" />
-              <span className="text-[#6b7280] text-[10px] uppercase font-bold">Muscle Mass</span>
+              <Target className="w-3.5 h-3.5 text-secondary" />
+              <span className="text-text-muted text-[10px] uppercase font-bold">Muscle Mass</span>
             </div>
-            <p className={`text-lg font-black ${simulation.muscleChange > 0 ? 'text-[#38B6FF]' : 'text-red-400'}`}>
+            <p className={`text-lg font-black ${simulation.muscleChange > 0 ? 'text-secondary' : 'text-red-400'}`}>
               {simulation.muscleChange > 0 ? '+' : ''}{simulation.muscleChange}%
             </p>
           </div>
@@ -157,20 +157,21 @@ export default function PredictiveAnalytics({ profile, onSimulationChange }: Pro
         <div className="h-[180px] w-full mt-4">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1f1f1f" vertical={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
               <XAxis 
                 dataKey="day" 
                 axisLine={false} 
                 tickLine={false} 
-                tick={{ fill: '#4b5563', fontSize: 10 }}
+                tick={{ fill: '#6B7280', fontSize: 10 }}
               />
               <YAxis 
                 hide 
                 domain={['dataMin - 2', 'dataMax + 2']} 
               />
               <Tooltip
-                contentStyle={{ backgroundColor: '#0a0a0a', border: '1px solid #1f1f1f', borderRadius: '8px' }}
-                itemStyle={{ fontSize: '12px' }}
+                contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #e5e7eb', borderRadius: '8px' }}
+                itemStyle={{ fontSize: '12px', color: '#1f2937' }}
+                labelStyle={{ color: '#6b7280' }}
               />
               <Legend verticalAlign="top" align="right" iconType="circle" wrapperStyle={{ fontSize: '10px', paddingBottom: '10px' }} />
               <Line 
@@ -186,7 +187,7 @@ export default function PredictiveAnalytics({ profile, onSimulationChange }: Pro
                 type="monotone" 
                 dataKey="optimal" 
                 name="Optimal Path" 
-                stroke="#2D5BFF" 
+                stroke="#475569" 
                 strokeWidth={2} 
                 dot={false}
                 activeDot={{ r: 4 }}
@@ -195,11 +196,11 @@ export default function PredictiveAnalytics({ profile, onSimulationChange }: Pro
           </ResponsiveContainer>
         </div>
 
-        <div className="bg-[#2D5BFF]/10 border border-[#2D5BFF]/20 rounded-xl p-3 flex items-start gap-3">
-          <Calendar className="w-5 h-5 text-[#2D5BFF] mt-0.5" />
+        <div className="bg-primary/10 border border-primary/20 rounded-xl p-3 flex items-start gap-3">
+          <Calendar className="w-5 h-5 text-primary mt-0.5" />
           <div>
-            <p className="text-white text-xs font-bold">Goal Reach Date</p>
-            <p className="text-[#2D5BFF] text-[11px]">
+            <p className="text-text-main text-xs font-bold">Goal Reach Date</p>
+            <p className="text-primary text-[11px]">
               {simulation.goalDateOffset === 0 
                 ? 'On track for June 15, 2026' 
                 : `Delayed by ~${simulation.goalDateOffset} days (Estimated)`}

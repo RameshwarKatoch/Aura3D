@@ -46,7 +46,7 @@ export default function BMIGauge({ bmi }: Props) {
           <path
             d={arcPath(startAngle, sweepAngle)}
             fill="none"
-            stroke="#1f1f1f"
+            stroke="#e5e7eb"
             strokeWidth={strokeWidth}
             strokeLinecap="round"
           />
@@ -65,15 +65,15 @@ export default function BMIGauge({ bmi }: Props) {
             y1={cy}
             x2={nx}
             y2={ny}
-            stroke="white"
+            stroke="#1F2937"
             strokeWidth="2"
             strokeLinecap="round"
           />
-          <circle cx={cx} cy={cy} r="5" fill="white" />
-          <text x={cx} y={cy + 30} textAnchor="middle" fill="white" fontSize="22" fontWeight="700">
+          <circle cx={cx} cy={cy} r="5" fill="#1F2937" />
+          <text x={cx} y={cy + 30} textAnchor="middle" fill="#1F2937" fontSize="22" fontWeight="700">
             {bmi.value}
           </text>
-          <text x={cx} y={cy + 46} textAnchor="middle" fill="#6b7280" fontSize="10">
+          <text x={cx} y={cy + 46} textAnchor="middle" fill="#6B7280" fontSize="10">
             BMI
           </text>
         </svg>
@@ -85,7 +85,7 @@ export default function BMIGauge({ bmi }: Props) {
         >
           {bmi.category}
         </span>
-        <p className="text-[#4b5563] text-xs mt-1">Health Risk: {bmi.risk}</p>
+        <p className="text-text-muted text-xs mt-1">Health Risk: {bmi.risk}</p>
       </div>
     </div>
   );

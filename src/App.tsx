@@ -50,28 +50,39 @@ export default function App() {
 
   useEffect(() => {
     const checkSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session?.user) {
-        await loadProfile(session.user.id);
-      } else {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session?.user) {
+          await loadProfile(session.user.id);
+        } else {
+          setAppState('onboarding');
+        }
+      } catch (err) {
+        console.error('Supabase session check failed:', err);
         setAppState('onboarding');
       }
     };
 
     checkSession();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      (async () => {
-        if (event === 'SIGNED_OUT') {
-          setProfile(null);
-          setAppState('onboarding');
-        } else if (event === 'SIGNED_IN' && session?.user) {
-          await loadProfile(session.user.id);
-        }
-      })();
-    });
+    let subscription: { unsubscribe: () => void } | undefined;
+    try {
+      const { data } = supabase.auth.onAuthStateChange((event, session) => {
+        (async () => {
+          if (event === 'SIGNED_OUT') {
+            setProfile(null);
+            setAppState('onboarding');
+          } else if (event === 'SIGNED_IN' && session?.user) {
+            await loadProfile(session.user.id);
+          }
+        })();
+      });
+      subscription = data.subscription;
+    } catch (err) {
+      console.error('Supabase auth listener failed:', err);
+    }
 
-    return () => subscription.unsubscribe();
+    return () => subscription?.unsubscribe();
   }, []);
 
   const loadProfile = async (userId: string) => {
@@ -108,7 +119,7 @@ export default function App() {
 
   if (appState === 'loading') {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center overflow-hidden">
+      <div className="min-h-screen bg-surface flex items-center justify-center overflow-hidden">
         {/* Ambient blobs */}
         <div className="absolute w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
         <div className="absolute w-[300px] h-[300px] bg-cyan-500/5 rounded-full blur-[80px] top-1/3 left-1/3 pointer-events-none" />
@@ -138,9 +149,9 @@ export default function App() {
             <motion.div
               animate={{
                 boxShadow: [
-                  '0 0 20px rgba(45,91,255,0.4)',
-                  '0 0 50px rgba(0,240,255,0.5)',
-                  '0 0 20px rgba(45,91,255,0.4)'
+                  '0 0 20px rgba(71,85,105,0.4)',
+                  '0 0 50px rgba(148,163,184,0.5)',
+                  '0 0 20px rgba(71,85,105,0.4)'
                 ]
               }}
               transition={{ duration: 2.5, repeat: Infinity }}
@@ -167,7 +178,7 @@ export default function App() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="text-[#6b7280] text-sm mt-1 tracking-widest uppercase font-medium"
+              className="text-text-muted text-sm mt-1 tracking-widest uppercase font-medium"
             >
               AI-Powered Health Platform
             </motion.p>
@@ -180,12 +191,12 @@ export default function App() {
             transition={{ delay: 0.4, duration: 0.4 }}
             className="flex flex-col items-center gap-2"
           >
-            <div className="w-56 h-0.5 bg-[#1a1a1a] rounded-full overflow-hidden">
+            <div className="w-56 h-0.5 bg-border rounded-full overflow-hidden">
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: '100%' }}
                 transition={{ delay: 0.5, duration: 1.8, ease: [0.4, 0, 0.2, 1] }}
-                className="h-full bg-gradient-to-r from-primary via-cyan-400 to-primary rounded-full"
+                className="h-full bg-gradient-to-r from-primary via-secondary to-primary rounded-full"
                 style={{ backgroundSize: '200%' }}
               />
             </div>
@@ -193,7 +204,7 @@ export default function App() {
               initial={{ opacity: 0 }}
               animate={{ opacity: [0, 1, 0.6, 1] }}
               transition={{ delay: 0.6, duration: 1.5, repeat: Infinity }}
-              className="text-[#4b5563] text-[11px] tracking-[0.2em] uppercase"
+              className="text-text-muted text-[11px] tracking-[0.2em] uppercase"
             >
               Initializing...
             </motion.p>
@@ -210,7 +221,7 @@ export default function App() {
   if (!profile) return null;
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a]">
+    <div className="min-h-screen bg-surface">
       {/* Ambient background layers */}
       <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
         <div className="absolute top-0 left-60 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
@@ -263,7 +274,7 @@ export default function App() {
                     <div className="w-10 h-10 border-2 border-primary/20 rounded-full" />
                     <div className="w-10 h-10 border-2 border-primary border-t-transparent rounded-full animate-spin absolute inset-0" />
                   </div>
-                  <span className="text-[#6b7280] text-sm">Loading module...</span>
+                  <span className="text-text-muted text-sm">Loading module...</span>
                 </div>
               }>
                 {activeView === 'dashboard' && <Dashboard

@@ -48,7 +48,7 @@ export default function FoodCard({ item, onLog }: Props) {
   };
 
   return (
-    <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-5 hover:border-[#2a2a2a] transition-all duration-200 hover:translate-y-[-1px] flex flex-col h-full">
+    <div className="bg-panel border border-border rounded-2xl p-5 hover:border-primary/20 transition-all duration-200 hover:translate-y-[-1px] flex flex-col h-full">
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-2">
           <span className="text-base">{mealIcons[item.meal_type]}</span>
@@ -59,48 +59,48 @@ export default function FoodCard({ item, onLog }: Props) {
             {item.category}
           </span>
         </div>
-        <span className="text-[#4b5563] text-xs">{item.serving_g}g base</span>
+        <span className="text-text-muted text-xs">{item.serving_g}g base</span>
       </div>
 
-      <h3 className="text-white font-semibold text-sm mb-3 leading-tight flex-1">{item.name}</h3>
+      <h3 className="text-text-main font-semibold text-sm mb-3 leading-tight flex-1">{item.name}</h3>
 
       <div className="flex items-center justify-between mb-4">
         <div className="text-center">
-          <p className="text-white font-bold text-lg leading-none">{item.calories}</p>
-          <p className="text-[#4b5563] text-[10px] mt-0.5">kcal</p>
+          <p className="text-text-main font-bold text-lg leading-none">{item.calories}</p>
+          <p className="text-text-muted text-[10px] mt-0.5">kcal</p>
         </div>
-        <div className="w-px h-8 bg-[#1f1f1f]" />
+        <div className="w-px h-8 bg-border" />
         <div className="text-center">
           <p className="text-[#3b82f6] font-semibold text-sm">{item.protein_g}g</p>
-          <p className="text-[#4b5563] text-[10px] mt-0.5">protein</p>
+          <p className="text-text-muted text-[10px] mt-0.5">protein</p>
         </div>
         <div className="text-center">
           <p className="text-[#f59e0b] font-semibold text-sm">{item.carbs_g}g</p>
-          <p className="text-[#4b5563] text-[10px] mt-0.5">carbs</p>
+          <p className="text-text-muted text-[10px] mt-0.5">carbs</p>
         </div>
         <div className="text-center">
           <p className="text-[#ef4444] font-semibold text-sm">{item.fat_g}g</p>
-          <p className="text-[#4b5563] text-[10px] mt-0.5">fat</p>
+          <p className="text-text-muted text-[10px] mt-0.5">fat</p>
         </div>
       </div>
 
       <div className="flex flex-wrap gap-1 mb-4">
         {item.is_vegan && (
-          <span className="text-[10px] px-1.5 py-0.5 rounded bg-green-500/15 text-green-400 font-medium">Vegan</span>
+          <span className="text-[10px] px-1.5 py-0.5 rounded bg-green-500/15 text-green-600 font-medium">Vegan</span>
         )}
         {item.is_veg && !item.is_vegan && (
-          <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 font-medium">Veg</span>
+          <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-600 font-medium">Veg</span>
         )}
         {item.is_non_veg && (
-          <span className="text-[10px] px-1.5 py-0.5 rounded bg-red-500/15 text-red-400 font-medium">Non-Veg</span>
+          <span className="text-[10px] px-1.5 py-0.5 rounded bg-red-500/15 text-red-600 font-medium">Non-Veg</span>
         )}
         {item.is_keto && (
-          <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-400 font-medium">Keto</span>
+          <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-600 font-medium">Keto</span>
         )}
       </div>
 
       {onLog && (
-        <div className="mt-auto pt-2 border-t border-[#1f1f1f]">
+        <div className="mt-auto pt-2 border-t border-border">
           {isLogging ? (
             <div className="flex items-center gap-2">
               <div className="flex-1 relative">
@@ -108,9 +108,9 @@ export default function FoodCard({ item, onLog }: Props) {
                   type="number"
                   value={customWeight}
                   onChange={(e) => setCustomWeight(Number(e.target.value))}
-                  className="w-full bg-[#0a0a0a] border border-[#1f1f1f] rounded-lg px-3 py-2 text-white text-xs font-bold focus:border-primary/50 outline-none"
+                  className="w-full bg-surface border border-border rounded-lg px-3 py-2 text-text-main text-xs font-bold focus:border-primary/50 outline-none"
                 />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[#6b7280] text-[10px] font-bold">g</span>
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted text-[10px] font-bold">g</span>
               </div>
               <button 
                 onClick={() => setIsLogging(false)}
@@ -128,7 +128,7 @@ export default function FoodCard({ item, onLog }: Props) {
           ) : (
             <button 
               onClick={() => setIsLogging(true)}
-              className="w-full py-2 bg-white/5 hover:bg-primary/20 text-white hover:text-primary border border-white/5 hover:border-primary/30 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-2"
+              className="w-full py-2 bg-surface hover:bg-primary/10 text-text-main hover:text-primary border border-border hover:border-primary/30 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-2"
             >
               <Plus size={14} />
               Add to Log

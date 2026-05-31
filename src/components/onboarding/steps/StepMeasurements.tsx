@@ -17,8 +17,8 @@ const goals: { value: Goal; label: string; description: string }[] = [
 export default function StepMeasurements({ data, update, onNext, onBack }: Props) {
   return (
     <div>
-      <h2 className="text-2xl font-bold text-white mb-1">Body measurements</h2>
-      <p className="text-[#6b7280] mb-8 text-sm">Used to calculate your BMI and caloric targets.</p>
+      <h2 className="text-2xl font-bold text-text-main mb-1">Body measurements</h2>
+      <p className="text-text-muted mb-8 text-sm">Used to calculate your BMI and caloric targets.</p>
 
       <div className="space-y-5">
         <div className="grid grid-cols-2 gap-3">
@@ -41,20 +41,20 @@ export default function StepMeasurements({ data, update, onNext, onBack }: Props
         </div>
 
         <div>
-          <label className="block text-[#9ca3af] text-xs font-medium mb-2 uppercase tracking-wider">Primary Goal</label>
+          <label className="block text-text-muted text-xs font-semibold mb-2 uppercase tracking-wider">Primary Goal</label>
           <div className="space-y-2">
             {goals.map(g => (
               <button
                 key={g.value}
                 onClick={() => update({ goal: g.value })}
-                className={`w-full flex items-center justify-between py-3.5 px-4 rounded-xl text-sm font-medium transition-all duration-200 border ${
+                className={`w-full flex items-center justify-between py-3.5 px-4 rounded-xl text-sm font-semibold transition-all duration-200 border ${
                   data.goal === g.value
-                    ? 'bg-emerald-500/10 border-emerald-500 text-white'
-                    : 'bg-[#1a1a1a] border-[#2a2a2a] text-[#9ca3af] hover:border-[#3a3a3a]'
+                    ? 'bg-primary/10 border-primary text-text-main'
+                    : 'bg-surface border-border text-text-muted hover:border-gray-300'
                 }`}
               >
                 <span>{g.label}</span>
-                <span className={`text-xs ${data.goal === g.value ? 'text-emerald-400' : 'text-[#4b5563]'}`}>
+                <span className={`text-xs ${data.goal === g.value ? 'text-primary font-bold' : 'text-text-muted'}`}>
                   {g.description}
                 </span>
               </button>
@@ -66,13 +66,13 @@ export default function StepMeasurements({ data, update, onNext, onBack }: Props
       <div className="flex gap-3 mt-8">
         <button
           onClick={onBack}
-          className="flex-1 bg-[#1a1a1a] border border-[#2a2a2a] hover:border-[#3a3a3a] text-[#9ca3af] font-semibold py-3.5 rounded-xl transition-all duration-200"
+          className="flex-1 bg-surface border border-border hover:bg-gray-100 text-text-main font-semibold py-3.5 rounded-xl transition-all duration-200"
         >
           Back
         </button>
         <button
           onClick={onNext}
-          className="flex-[2] bg-emerald-500 hover:bg-emerald-400 text-black font-semibold py-3.5 rounded-xl transition-all duration-200 active:scale-[0.98]"
+          className="flex-[2] bg-primary hover:bg-primary/95 text-white font-semibold py-3.5 rounded-xl transition-all duration-200 active:scale-[0.98]"
         >
           Continue
         </button>

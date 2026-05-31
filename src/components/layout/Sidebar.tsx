@@ -75,17 +75,17 @@ export default function Sidebar({ activeView, onNavigate, userName, onSignOut, t
 
   return (
     <>
-      <aside className="hidden lg:flex flex-col w-60 h-screen glass-panel fixed left-0 top-0 z-40 border-r border-white/5">
+      <aside className="hidden lg:flex flex-col w-60 h-screen glass-panel fixed left-0 top-0 z-40 border-r border-border">
         {/* Header */}
-        <div className="p-5 border-b border-white/5 bg-gradient-to-b from-primary/5 to-transparent">
+        <div className="p-5 border-b border-border bg-gradient-to-b from-primary/5 to-transparent">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-cyan-500 flex items-center justify-center shadow-[0_0_15px_rgba(45,91,255,0.4)]">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-cyan-500 flex items-center justify-center shadow-sm">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
                 </svg>
               </div>
-              <span className="font-black text-lg tracking-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+              <span className="font-black text-lg tracking-tight text-text-main" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                 Aura<span className="text-gradient-primary">3D</span>
               </span>
             </div>
@@ -119,7 +119,7 @@ export default function Sidebar({ activeView, onNavigate, userName, onSignOut, t
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 group relative ${
                   active
                     ? 'bg-primary/15 text-primary'
-                    : 'text-[#6b7280] hover:text-white hover:bg-white/5'
+                    : 'text-text-muted hover:text-text-main hover:bg-black/5'
                 }`}
               >
                 {active && (
@@ -133,7 +133,7 @@ export default function Sidebar({ activeView, onNavigate, userName, onSignOut, t
           })}
 
           <div className="mt-8 mb-2 px-3">
-            <h3 className="text-[#6b7280] text-xs font-semibold uppercase tracking-wider">Training Mode</h3>
+            <h3 className="text-text-muted text-xs font-semibold uppercase tracking-wider">Training Mode</h3>
           </div>
           <div className="px-2 space-y-1">
             {trainingModes.map(mode => {
@@ -148,8 +148,8 @@ export default function Sidebar({ activeView, onNavigate, userName, onSignOut, t
                   }}
                   className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all duration-200 ${
                     active
-                      ? 'bg-primary/20 text-white border border-primary/30'
-                      : 'text-[#6b7280] hover:text-white hover:bg-[#161616]'
+                      ? 'bg-primary/20 text-text-main border border-primary/30'
+                      : 'text-text-muted hover:text-text-main hover:bg-surface'
                   }`}
                 >
                   <Icon size={16} className={active ? 'text-primary' : ''} />
@@ -162,7 +162,7 @@ export default function Sidebar({ activeView, onNavigate, userName, onSignOut, t
           {dietaryPreference && onDietaryPreferenceChange && (
             <>
               <div className="mt-8 mb-2 px-3">
-                <h3 className="text-[#6b7280] text-xs font-semibold uppercase tracking-wider">Dietary Preference</h3>
+                <h3 className="text-text-muted text-xs font-semibold uppercase tracking-wider">Dietary Preference</h3>
               </div>
               <div className="px-2 space-y-1">
                 {[
@@ -176,8 +176,8 @@ export default function Sidebar({ activeView, onNavigate, userName, onSignOut, t
                       onClick={() => onDietaryPreferenceChange(diet.id as DietaryPreference)}
                       className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all duration-200 ${
                         active
-                          ? 'bg-primary/20 text-white border border-primary/30'
-                          : 'text-[#6b7280] hover:text-white hover:bg-[#161616]'
+                          ? 'bg-primary/20 text-text-main border border-primary/30'
+                          : 'text-text-muted hover:text-text-main hover:bg-surface'
                       }`}
                     >
                       {diet.label}
@@ -189,15 +189,15 @@ export default function Sidebar({ activeView, onNavigate, userName, onSignOut, t
           )}
         </nav>
 
-        <div className="p-4 border-t border-[#1a1a1a]">
-          <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[#161616] mb-2">
+        <div className="p-4 border-t border-border">
+          <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-surface mb-2">
             <div className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center">
               <span className="text-primary text-xs font-bold">
                 {userName.charAt(0).toUpperCase()}
               </span>
             </div>
             <div className="flex-1 overflow-hidden flex flex-col">
-              <span className="text-white text-sm font-medium truncate">{userName}</span>
+              <span className="text-text-main text-sm font-medium truncate">{userName}</span>
               {streak > 0 && (
                 <div className="flex items-center gap-1 mt-0.5">
                   <Flame 
@@ -212,7 +212,7 @@ export default function Sidebar({ activeView, onNavigate, userName, onSignOut, t
           </div>
           <button
             onClick={handleSignOut}
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-[#6b7280] hover:text-red-400 hover:bg-red-500/10 transition-all duration-200"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-text-muted hover:text-red-600 hover:bg-red-500/10 transition-all duration-200"
           >
             <LogOut size={16} />
             Sign Out
@@ -220,7 +220,7 @@ export default function Sidebar({ activeView, onNavigate, userName, onSignOut, t
         </div>
       </aside>
 
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0d0d0d]/95 backdrop-blur-xl border-t border-[#1a1a1a] flex">
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-panel/95 backdrop-blur-xl border-t border-border flex">
         {navItems.map(item => {
           const Icon = item.icon;
           const active = activeView === item.view;
@@ -229,7 +229,7 @@ export default function Sidebar({ activeView, onNavigate, userName, onSignOut, t
               key={item.view}
               onClick={() => onNavigate(item.view)}
               className={`flex-1 flex flex-col items-center gap-1 py-3 transition-all duration-200 relative ${
-                active ? 'text-primary' : 'text-[#4b5563] hover:text-[#9ca3af]'
+                active ? 'text-primary' : 'text-text-muted hover:text-text-main'
               }`}
             >
               {active && (

@@ -152,25 +152,25 @@ export default function NutritionView({ profile }: Props) {
     <div className="space-y-10">
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="text-3xl font-black text-white tracking-tight flex items-center gap-3">
+          <h1 className="text-3xl font-black text-text-main tracking-tight flex items-center gap-3">
             Nutrition Hub
             <span className="text-[10px] font-black uppercase bg-primary/10 text-primary px-2 py-1 rounded-full tracking-widest border border-primary/20">
               AI Powered
             </span>
           </h1>
-          <p className="text-[#6b7280] text-sm mt-1">Smart tracking for your goals</p>
+          <p className="text-text-muted text-sm mt-1">Smart tracking for your goals</p>
         </div>
       </div>
 
       {/* Daily Macro Progress Section */}
-      <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-6">
+      <div className="bg-panel border border-border rounded-2xl p-6">
         <div className="flex items-center gap-3 mb-6">
           <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
             <Target size={20} className="text-primary" />
           </div>
           <div>
-            <h2 className="text-white font-bold text-lg">Daily Targets</h2>
-            <p className="text-[#6b7280] text-xs uppercase tracking-widest font-semibold">Goal: {profile.goal}</p>
+            <h2 className="text-text-main font-bold text-lg">Daily Targets</h2>
+            <p className="text-text-muted text-xs uppercase tracking-widest font-semibold">Goal: {profile.goal}</p>
           </div>
         </div>
 
@@ -178,10 +178,10 @@ export default function NutritionView({ profile }: Props) {
           {/* Calories */}
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
-              <span className="text-[#6b7280] font-bold">Calories</span>
-              <span className="text-white font-bold">{consumed.calories} <span className="text-[#6b7280]">/ {targets.targetCalories}</span></span>
+              <span className="text-text-muted font-bold">Calories</span>
+              <span className="text-text-main font-bold">{consumed.calories} <span className="text-text-muted">/ {targets.targetCalories}</span></span>
             </div>
-            <div className="h-2 w-full bg-[#1f1f1f] rounded-full overflow-hidden">
+            <div className="h-2 w-full bg-border rounded-full overflow-hidden">
               <motion.div 
                 initial={{ width: 0 }}
                 animate={{ width: `${Math.min(100, (consumed.calories / targets.targetCalories) * 100)}%` }}
@@ -193,9 +193,9 @@ export default function NutritionView({ profile }: Props) {
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
               <span className="text-[#3b82f6] font-bold">Protein</span>
-              <span className="text-white font-bold">{consumed.protein}g <span className="text-[#6b7280]">/ {targets.targetProtein}g</span></span>
+              <span className="text-text-main font-bold">{consumed.protein}g <span className="text-text-muted">/ {targets.targetProtein}g</span></span>
             </div>
-            <div className="h-2 w-full bg-[#1f1f1f] rounded-full overflow-hidden">
+            <div className="h-2 w-full bg-border rounded-full overflow-hidden">
               <motion.div 
                 initial={{ width: 0 }}
                 animate={{ width: `${Math.min(100, (consumed.protein / targets.targetProtein) * 100)}%` }}
@@ -207,9 +207,9 @@ export default function NutritionView({ profile }: Props) {
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
               <span className="text-[#f59e0b] font-bold">Carbs</span>
-              <span className="text-white font-bold">{consumed.carbs}g <span className="text-[#6b7280]">/ {targets.targetCarbs}g</span></span>
+              <span className="text-text-main font-bold">{consumed.carbs}g <span className="text-text-muted">/ {targets.targetCarbs}g</span></span>
             </div>
-            <div className="h-2 w-full bg-[#1f1f1f] rounded-full overflow-hidden">
+            <div className="h-2 w-full bg-border rounded-full overflow-hidden">
               <motion.div 
                 initial={{ width: 0 }}
                 animate={{ width: `${Math.min(100, (consumed.carbs / targets.targetCarbs) * 100)}%` }}
@@ -221,9 +221,9 @@ export default function NutritionView({ profile }: Props) {
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
               <span className="text-[#ef4444] font-bold">Fats</span>
-              <span className="text-white font-bold">{consumed.fat}g <span className="text-[#6b7280]">/ {targets.targetFat}g</span></span>
+              <span className="text-text-main font-bold">{consumed.fat}g <span className="text-text-muted">/ {targets.targetFat}g</span></span>
             </div>
-            <div className="h-2 w-full bg-[#1f1f1f] rounded-full overflow-hidden">
+            <div className="h-2 w-full bg-border rounded-full overflow-hidden">
               <motion.div 
                 initial={{ width: 0 }}
                 animate={{ width: `${Math.min(100, (consumed.fat / targets.targetFat) * 100)}%` }}
@@ -235,8 +235,8 @@ export default function NutritionView({ profile }: Props) {
 
         {/* Logged Foods List */}
         {loggedFoods.length > 0 && (
-          <div className="mt-8 pt-6 border-t border-[#1f1f1f]">
-            <h3 className="text-white font-bold text-sm mb-4 uppercase tracking-widest text-[#6b7280]">Logged Today ({loggedFoods.length})</h3>
+          <div className="mt-8 pt-6 border-t border-border">
+            <h3 className="text-text-muted font-bold text-sm mb-4 uppercase tracking-widest">Logged Today ({loggedFoods.length})</h3>
             <div className="space-y-3">
               <AnimatePresence>
                 {loggedFoods.map((food, index) => (
@@ -245,20 +245,20 @@ export default function NutritionView({ profile }: Props) {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="flex items-center justify-between p-3 bg-white/5 border border-white/5 rounded-xl group"
+                    className="flex items-center justify-between p-3 bg-surface border border-border rounded-xl group"
                   >
                     <div className="flex items-center gap-3">
                       <span className="text-xl">
                         {food.meal_type === 'breakfast' ? '🌅' : food.meal_type === 'lunch' ? '☀️' : food.meal_type === 'dinner' ? '🌙' : '🥜'}
                       </span>
                       <div>
-                        <p className="text-white text-sm font-bold">{food.name}</p>
-                        <p className="text-[#6b7280] text-xs">{food.calories} kcal • {food.protein_g}g P • {food.carbs_g}g C • {food.fat_g}g F</p>
+                        <p className="text-text-main text-sm font-bold">{food.name}</p>
+                        <p className="text-text-muted text-xs">{food.calories} kcal • {food.protein_g}g P • {food.carbs_g}g C • {food.fat_g}g F</p>
                       </div>
                     </div>
                     <button 
                       onClick={() => removeLoggedFood(index)}
-                      className="text-[#4b5563] hover:text-red-500 transition-colors p-2"
+                      className="text-text-muted hover:text-red-500 transition-colors p-2"
                     >
                       <Trash2 size={16} />
                     </button>
@@ -273,19 +273,19 @@ export default function NutritionView({ profile }: Props) {
       <div className="space-y-6">
         <div className="flex items-center gap-2">
           <Sparkles size={18} className="text-primary" />
-          <h2 className="text-lg font-bold text-white">Food Explorer</h2>
+          <h2 className="text-lg font-bold text-text-main">Food Explorer</h2>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3">
           <div className="flex gap-2 w-full sm:w-auto flex-1">
             <div className="relative flex-1">
-              <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#4b5563]" />
+              <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted" />
               <input
                 type="text"
                 placeholder="Search database..."
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-                className="w-full bg-[#111111] border border-[#1f1f1f] rounded-xl py-2.5 pl-10 pr-4 text-white text-sm placeholder-[#4b5563] focus:outline-none focus:border-primary transition-colors"
+                className="w-full bg-panel border border-border rounded-xl py-2.5 pl-10 pr-4 text-text-main text-sm placeholder-text-muted focus:outline-none focus:border-primary transition-colors"
               />
             </div>
             
@@ -299,7 +299,7 @@ export default function NutritionView({ profile }: Props) {
           </div>
 
           <div className="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 scrollbar-hide">
-            <SlidersHorizontal size={15} className="text-[#6b7280] flex-shrink-0" />
+            <SlidersHorizontal size={15} className="text-text-muted flex-shrink-0" />
             <div className="flex gap-1">
               {(['all', 'protein', 'carbs', 'fat', 'vegetables'] as const).map(cat => (
                 <button
@@ -307,8 +307,8 @@ export default function NutritionView({ profile }: Props) {
                   onClick={() => setActiveCategory(cat)}
                   className={`px-3 py-2 rounded-lg text-xs font-medium transition-all duration-200 whitespace-nowrap ${
                     activeCategory === cat
-                      ? 'bg-[#1f1f1f] text-white'
-                      : 'text-[#6b7280] hover:text-[#9ca3af]'
+                      ? 'bg-primary text-white'
+                      : 'text-text-muted hover:text-text-main'
                   }`}
                 >
                   {cat.charAt(0).toUpperCase() + cat.slice(1)}
@@ -318,7 +318,7 @@ export default function NutritionView({ profile }: Props) {
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-[#111111] to-[#0a0a0a] border border-[#1f1f1f] rounded-2xl p-6 relative overflow-hidden">
+        <div className="bg-panel border border-border rounded-2xl p-6 relative overflow-hidden shadow-sm">
           <div className="absolute top-0 right-0 p-8 opacity-5">
             <Star size={120} />
           </div>
@@ -328,24 +328,24 @@ export default function NutritionView({ profile }: Props) {
               <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
                 <Star size={16} className="text-primary" />
               </div>
-              <h2 className="text-white font-bold uppercase tracking-widest text-xs">Curated Indian Picks</h2>
+              <h2 className="text-text-main font-bold uppercase tracking-widest text-xs">Curated Indian Picks</h2>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {recommendations.map((rec, i) => (
-                <div key={i} className="bg-[#0a0a0a]/50 border border-white/5 rounded-xl p-4 hover:border-primary/30 transition-all group cursor-pointer">
+                <div key={i} className="bg-surface border border-border rounded-xl p-4 hover:border-primary/30 transition-all group cursor-pointer">
                   <div className="flex items-center justify-between mb-3">
-                    <div className="w-10 h-10 rounded-full bg-[#111111] flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="w-10 h-10 rounded-full bg-panel border border-border flex items-center justify-center group-hover:scale-110 transition-transform">
                       <rec.icon size={20} className="text-primary" />
                     </div>
                     <span className="text-[10px] font-black uppercase tracking-widest text-primary bg-primary/10 px-2 py-1 rounded">
                       {rec.tag}
                     </span>
                   </div>
-                  <h3 className="text-white font-bold text-sm mb-1">{rec.name}</h3>
+                  <h3 className="text-text-main font-bold text-sm mb-1">{rec.name}</h3>
                   <div className="flex items-center gap-3">
-                    <p className="text-[#6b7280] text-[10px] uppercase font-bold">Protein: <span className="text-white">{rec.protein}</span></p>
-                    <p className="text-[#6b7280] text-[10px] uppercase font-bold">Cals: <span className="text-white">{rec.cals}</span></p>
+                    <p className="text-text-muted text-[10px] uppercase font-bold">Protein: <span className="text-text-main">{rec.protein}</span></p>
+                    <p className="text-text-muted text-[10px] uppercase font-bold">Cals: <span className="text-text-main">{rec.cals}</span></p>
                   </div>
                 </div>
               ))}
@@ -354,7 +354,7 @@ export default function NutritionView({ profile }: Props) {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3">
-          <div className="bg-[#111111] border border-[#1f1f1f] rounded-xl p-1 flex gap-1">
+          <div className="bg-panel border border-border rounded-xl p-1 flex gap-1">
             {(Object.keys(dietLabels) as DietaryPreference[]).map(diet => (
               <button
                 key={diet}
@@ -362,7 +362,7 @@ export default function NutritionView({ profile }: Props) {
                 className={`px-3 py-2 rounded-lg text-xs font-semibold transition-all duration-200 ${
                   activeDiet === diet
                     ? 'bg-primary text-white'
-                    : 'text-[#6b7280] hover:text-[#9ca3af]'
+                    : 'text-text-muted hover:text-text-main'
                 }`}
               >
                 {dietLabels[diet]}
@@ -370,15 +370,15 @@ export default function NutritionView({ profile }: Props) {
             ))}
           </div>
 
-          <div className="bg-[#111111] border border-[#1f1f1f] rounded-xl p-1 flex gap-1 overflow-x-auto scrollbar-hide">
+          <div className="bg-panel border border-border rounded-xl p-1 flex gap-1 overflow-x-auto scrollbar-hide">
             {mealTabs.map(tab => (
               <button
                 key={tab.value}
                 onClick={() => setActiveMeal(tab.value)}
                 className={`px-3 py-2 rounded-lg text-xs font-medium transition-all duration-200 whitespace-nowrap ${
                   activeMeal === tab.value
-                    ? 'bg-[#1f1f1f] text-white'
-                    : 'text-[#6b7280] hover:text-[#9ca3af]'
+                    ? 'bg-primary text-white'
+                    : 'text-text-muted hover:text-text-main'
                 }`}
               >
                 {tab.label}
@@ -393,11 +393,11 @@ export default function NutritionView({ profile }: Props) {
           </div>
         ) : filtered.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-[#6b7280]">No foods found for this filter combination.</p>
+            <p className="text-text-muted">No foods found for this filter combination.</p>
           </div>
         ) : (
           <div>
-            <p className="text-[#4b5563] text-xs mb-4">{filtered.length} foods found</p>
+            <p className="text-text-muted text-xs mb-4">{filtered.length} foods found</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
               {filtered.map(food => (
                 <FoodCard key={food.id} item={food} onLog={handleLogFood} />

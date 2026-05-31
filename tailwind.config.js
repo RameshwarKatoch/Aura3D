@@ -4,10 +4,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#2D5BFF',
-        secondary: '#00F0FF',
-        surface: '#0d0d0d',
-        surfaceHover: '#161616',
+        primary: '#475569',
+        secondary: '#94A3B8',
+        surface: '#F9F8F6',
+        panel: '#FFFFFF',
+        border: '#E5E7EB',
+        'text-main': '#1F2937',
+        'text-muted': '#6B7280',
+      },
+      textColor: {
+        'text-main': '#1F2937',
+        'text-muted': '#6B7280',
+      },
+      borderColor: {
+        border: '#E5E7EB',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-out forwards',

@@ -16,7 +16,7 @@ function Ring({ value, max, label, unit, color }: RingProps) {
     <div className="flex flex-col items-center gap-2">
       <div className="relative">
         <svg width="80" height="80" viewBox="0 0 80 80">
-          <circle cx="40" cy="40" r={r} fill="none" stroke="#1f1f1f" strokeWidth="8" />
+          <circle cx="40" cy="40" r={r} fill="none" stroke="#e5e7eb" strokeWidth="8" />
           <circle
             cx="40"
             cy="40"
@@ -32,11 +32,11 @@ function Ring({ value, max, label, unit, color }: RingProps) {
           />
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-white font-bold text-sm leading-none">{value}</span>
-          <span className="text-[#6b7280] text-[9px]">{unit}</span>
+          <span className="text-text-main font-bold text-sm leading-none">{value}</span>
+          <span className="text-text-muted text-[9px]">{unit}</span>
         </div>
       </div>
-      <span className="text-[#9ca3af] text-xs">{label}</span>
+      <span className="text-text-muted text-xs font-semibold">{label}</span>
     </div>
   );
 }

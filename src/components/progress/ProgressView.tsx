@@ -124,13 +124,13 @@ export default function ProgressView({ profile }: Props) {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-black text-white tracking-tight flex items-center gap-3">
+          <h1 className="text-3xl font-black text-text-main tracking-tight flex items-center gap-3">
             Progress Tracker
             <span className="text-[10px] font-black uppercase bg-primary/10 text-primary px-2 py-1 rounded-full tracking-widest border border-primary/20">
               Live Sync
             </span>
           </h1>
-          <p className="text-[#6b7280] text-sm mt-1">Log workouts and track your strength trajectory.</p>
+          <p className="text-text-muted text-sm mt-1">Log workouts and track your strength trajectory.</p>
         </div>
       </div>
 
@@ -141,37 +141,37 @@ export default function ProgressView({ profile }: Props) {
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-6"
+            className="bg-panel border border-border rounded-2xl p-6"
           >
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
                 <Plus size={20} className="text-primary" />
               </div>
               <div>
-                <h3 className="text-white font-bold">Log Workout</h3>
-                <p className="text-[#6b7280] text-[10px] uppercase tracking-widest font-bold">Manual Entry</p>
+                <h3 className="text-text-main font-bold">Log Workout</h3>
+                <p className="text-text-muted text-[10px] uppercase tracking-widest font-bold">Manual Entry</p>
               </div>
             </div>
 
             <form onSubmit={handleLogWorkout} className="space-y-4">
               <div>
-                <label className="block text-[#6b7280] text-[10px] uppercase font-bold mb-2">Exercise Name</label>
+                <label className="block text-text-muted text-[10px] uppercase font-bold mb-2">Exercise Name</label>
                 <input 
                   type="text" 
                   required
                   placeholder="e.g. Bench Press"
                   value={exercise}
                   onChange={(e) => setExercise(e.target.value)}
-                  className="w-full bg-[#0a0a0a] border border-[#1f1f1f] rounded-xl px-4 py-3 text-white text-sm focus:border-primary/50 transition-colors outline-none"
+                  className="w-full bg-surface border border-border rounded-xl px-4 py-3 text-text-main text-sm focus:border-primary/50 transition-colors outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-[#6b7280] text-[10px] uppercase font-bold mb-2">Primary Muscle</label>
+                <label className="block text-text-muted text-[10px] uppercase font-bold mb-2">Primary Muscle</label>
                 <select 
                   value={muscleGroup}
                   onChange={(e) => setMuscleGroup(e.target.value as MuscleGroupName)}
-                  className="w-full bg-[#0a0a0a] border border-[#1f1f1f] rounded-xl px-4 py-3 text-white text-sm focus:border-primary/50 transition-colors outline-none appearance-none"
+                  className="w-full bg-surface border border-border rounded-xl px-4 py-3 text-text-main text-sm focus:border-primary/50 transition-colors outline-none appearance-none"
                 >
                   {MUSCLE_GROUPS.map(mg => <option key={mg} value={mg}>{mg}</option>)}
                 </select>
@@ -179,23 +179,23 @@ export default function ProgressView({ profile }: Props) {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[#6b7280] text-[10px] uppercase font-bold mb-2">Weight (KG)</label>
+                  <label className="block text-text-muted text-[10px] uppercase font-bold mb-2">Weight (KG)</label>
                   <input 
                     type="number" 
                     required min="0" step="0.5"
                     value={weight || ''}
                     onChange={(e) => setWeight(Number(e.target.value))}
-                    className="w-full bg-[#0a0a0a] border border-[#1f1f1f] rounded-xl px-4 py-3 text-white text-sm focus:border-primary/50 transition-colors outline-none"
+                    className="w-full bg-surface border border-border rounded-xl px-4 py-3 text-text-main text-sm focus:border-primary/50 transition-colors outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-[#6b7280] text-[10px] uppercase font-bold mb-2">Reps</label>
+                  <label className="block text-text-muted text-[10px] uppercase font-bold mb-2">Reps</label>
                   <input 
                     type="number" 
                     required min="1"
                     value={reps || ''}
                     onChange={(e) => setReps(Number(e.target.value))}
-                    className="w-full bg-[#0a0a0a] border border-[#1f1f1f] rounded-xl px-4 py-3 text-white text-sm focus:border-primary/50 transition-colors outline-none"
+                    className="w-full bg-surface border border-border rounded-xl px-4 py-3 text-text-main text-sm focus:border-primary/50 transition-colors outline-none"
                   />
                 </div>
               </div>
@@ -212,15 +212,15 @@ export default function ProgressView({ profile }: Props) {
           </motion.div>
 
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-4 flex flex-col justify-center">
+            <div className="bg-panel border border-border rounded-2xl p-4 flex flex-col justify-center">
               <Zap className="text-primary mb-2" size={20} />
-              <p className="text-2xl font-black text-white">{totalSets}</p>
-              <p className="text-[#6b7280] text-[10px] uppercase font-bold">Total Sets</p>
+              <p className="text-2xl font-black text-text-main">{totalSets}</p>
+              <p className="text-text-muted text-[10px] uppercase font-bold">Total Sets</p>
             </div>
-            <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-4 flex flex-col justify-center">
-              <Dumbbell className="text-emerald-400 mb-2" size={20} />
-              <p className="text-2xl font-black text-white">{totalVolume.toLocaleString()} <span className="text-sm">kg</span></p>
-              <p className="text-[#6b7280] text-[10px] uppercase font-bold">Total Volume</p>
+            <div className="bg-panel border border-border rounded-2xl p-4 flex flex-col justify-center">
+              <Dumbbell className="text-emerald-500 mb-2" size={20} />
+              <p className="text-2xl font-black text-text-main">{totalVolume.toLocaleString()} <span className="text-text-muted text-sm font-semibold">kg</span></p>
+              <p className="text-text-muted text-[10px] uppercase font-bold">Total Volume</p>
             </div>
           </div>
         </div>
@@ -230,7 +230,7 @@ export default function ProgressView({ profile }: Props) {
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-6"
+            className="bg-panel border border-border rounded-2xl p-6"
           >
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
               <div className="flex items-center gap-3">
@@ -238,15 +238,15 @@ export default function ProgressView({ profile }: Props) {
                   <TrendingUp size={20} className="text-emerald-500" />
                 </div>
                 <div>
-                  <h3 className="text-white font-bold">Strength Evolution</h3>
-                  <p className="text-[#6b7280] text-[10px] uppercase tracking-widest font-bold">Weekly Aggregation</p>
+                  <h3 className="text-text-main font-bold">Strength Evolution</h3>
+                  <p className="text-text-muted text-[10px] uppercase tracking-widest font-bold">Weekly Aggregation</p>
                 </div>
               </div>
               
               <select 
                 value={selectedExerciseFilter}
                 onChange={(e) => setSelectedExerciseFilter(e.target.value)}
-                className="bg-[#0a0a0a] border border-[#1f1f1f] text-white text-xs px-3 py-2 rounded-lg outline-none"
+                className="bg-surface border border-border text-text-main text-xs px-3 py-2 rounded-lg outline-none"
               >
                 {uniqueExercises.map(ex => (
                   <option key={ex} value={ex}>{ex.toUpperCase()}</option>
@@ -258,26 +258,26 @@ export default function ProgressView({ profile }: Props) {
               <div className="space-y-8">
                 {/* Max Weight Chart */}
                 <div>
-                  <h4 className="text-white text-sm font-bold mb-4 flex items-center gap-2">
+                  <h4 className="text-text-main text-sm font-bold mb-4 flex items-center gap-2">
                     <Target size={16} className="text-primary" /> Max Weight Lifted (KG)
                   </h4>
                   <div className="h-64">
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart data={weeklyChartData}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#1f1f1f" vertical={false} />
-                        <XAxis dataKey="dateStr" stroke="#4b5563" fontSize={12} tickLine={false} axisLine={false} />
-                        <YAxis stroke="#4b5563" fontSize={12} tickLine={false} axisLine={false} />
+                        <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
+                        <XAxis dataKey="dateStr" stroke="#6b7280" fontSize={12} tickLine={false} axisLine={false} />
+                        <YAxis stroke="#6b7280" fontSize={12} tickLine={false} axisLine={false} />
                         <Tooltip 
-                          contentStyle={{ backgroundColor: '#0a0a0a', border: '1px solid #1f1f1f', borderRadius: '8px' }}
-                          itemStyle={{ color: '#38B6FF' }}
+                          contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #e5e7eb', borderRadius: '8px' }}
+                          itemStyle={{ color: '#475569' }}
                         />
                         <Line 
                           type="monotone" 
                           dataKey="maxWeight" 
                           name="Max Weight"
-                          stroke="#38B6FF" 
+                          stroke="#475569" 
                           strokeWidth={3}
-                          dot={{ r: 4, fill: '#38B6FF', strokeWidth: 2, stroke: '#0a0a0a' }}
+                          dot={{ r: 4, fill: '#475569', strokeWidth: 2, stroke: '#ffffff' }}
                           activeDot={{ r: 6 }}
                         />
                       </LineChart>
@@ -287,23 +287,23 @@ export default function ProgressView({ profile }: Props) {
 
                 {/* Volume Chart */}
                 <div>
-                  <h4 className="text-white text-sm font-bold mb-4 flex items-center gap-2">
+                  <h4 className="text-text-main text-sm font-bold mb-4 flex items-center gap-2">
                     <Dumbbell size={16} className="text-emerald-500" /> Weekly Volume (Reps × Weight)
                   </h4>
                   <div className="h-64">
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart data={weeklyChartData}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#1f1f1f" vertical={false} />
-                        <XAxis dataKey="dateStr" stroke="#4b5563" fontSize={12} tickLine={false} axisLine={false} />
-                        <YAxis stroke="#4b5563" fontSize={12} tickLine={false} axisLine={false} />
+                        <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
+                        <XAxis dataKey="dateStr" stroke="#6b7280" fontSize={12} tickLine={false} axisLine={false} />
+                        <YAxis stroke="#6b7280" fontSize={12} tickLine={false} axisLine={false} />
                         <Tooltip 
-                          contentStyle={{ backgroundColor: '#0a0a0a', border: '1px solid #1f1f1f', borderRadius: '8px' }}
+                          contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #e5e7eb', borderRadius: '8px' }}
                           itemStyle={{ color: '#10b981' }}
                         />
                         <Bar 
                           dataKey="volume" 
                           name="Volume (kg)"
-                          fill="#10b981" 
+                          fill="#94A3B8" 
                           radius={[4, 4, 0, 0]}
                         />
                       </BarChart>
@@ -312,10 +312,10 @@ export default function ProgressView({ profile }: Props) {
                 </div>
               </div>
             ) : (
-              <div className="h-64 flex flex-col items-center justify-center text-center border-2 border-dashed border-[#1f1f1f] rounded-xl">
-                <Calendar className="text-[#4b5563] mb-3" size={32} />
-                <p className="text-white font-bold">No Data Available</p>
-                <p className="text-[#6b7280] text-sm mt-1">Log workouts to see your weekly progress.</p>
+              <div className="h-64 flex flex-col items-center justify-center text-center border-2 border-dashed border-border rounded-xl">
+                <Calendar className="text-text-muted mb-3" size={32} />
+                <p className="text-text-main font-bold">No Data Available</p>
+                <p className="text-text-muted text-sm mt-1">Log workouts to see your weekly progress.</p>
               </div>
             )}
           </motion.div>
@@ -326,33 +326,33 @@ export default function ProgressView({ profile }: Props) {
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-6 mt-8"
+        className="bg-panel border border-border rounded-2xl p-6 mt-8"
       >
         <div className="flex items-center gap-3 mb-6">
           <div className="w-10 h-10 rounded-xl bg-[#FDB913]/10 flex items-center justify-center">
             <Target size={20} className="text-[#FDB913]" />
           </div>
           <div>
-            <h3 className="text-white font-bold">Aura Quest History</h3>
-            <p className="text-[#6b7280] text-[10px] uppercase tracking-widest font-bold">Daily Completions</p>
+            <h3 className="text-text-main font-bold">Aura Quest History</h3>
+            <p className="text-text-muted text-[10px] uppercase tracking-widest font-bold">Daily Completions</p>
           </div>
         </div>
 
         {questLogs.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {questLogs.slice().reverse().map((log, i) => (
-              <div key={i} className="bg-[#161616] border border-[#1f1f1f] rounded-xl p-4 flex flex-col gap-2">
-                <div className="flex justify-between items-center border-b border-[#2a2a2a] pb-2">
-                  <span className="text-[#9ca3af] text-xs font-medium">{new Date(log.date).toLocaleDateString()}</span>
+              <div key={i} className="bg-surface border border-border rounded-xl p-4 flex flex-col gap-2">
+                <div className="flex justify-between items-center border-b border-border pb-2">
+                  <span className="text-text-muted text-xs font-medium">{new Date(log.date).toLocaleDateString()}</span>
                   <span className="text-[#FDB913] text-xs font-bold">+{log.creditsEarned} Credits</span>
                 </div>
                 <div className="flex justify-between items-end mt-1">
                   <div>
-                    <p className="text-[#6b7280] text-[10px] uppercase font-bold">Quests</p>
-                    <p className="text-white font-bold text-lg">{log.questsCompleted}/{log.totalQuests}</p>
+                    <p className="text-text-muted text-[10px] uppercase font-bold">Quests</p>
+                    <p className="text-text-main font-bold text-lg">{log.questsCompleted}/{log.totalQuests}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-[#6b7280] text-[10px] uppercase font-bold">Streak Level</p>
+                    <p className="text-text-muted text-[10px] uppercase font-bold">Streak Level</p>
                     <p className="text-orange-500 font-bold flex items-center gap-1 justify-end"><Zap size={14} /> Lvl {log.streakLevel}</p>
                   </div>
                 </div>
@@ -360,10 +360,10 @@ export default function ProgressView({ profile }: Props) {
             ))}
           </div>
         ) : (
-          <div className="py-8 flex flex-col items-center justify-center text-center border-2 border-dashed border-[#1f1f1f] rounded-xl">
-            <Target className="text-[#4b5563] mb-3" size={32} />
-            <p className="text-white font-bold">No Quests Claimed Yet</p>
-            <p className="text-[#6b7280] text-sm mt-1">Complete your daily Aura Quests and claim the bonus to build your history.</p>
+          <div className="py-8 flex flex-col items-center justify-center text-center border-2 border-dashed border-border rounded-xl">
+            <Target className="text-text-muted mb-3" size={32} />
+            <p className="text-text-main font-bold">No Quests Claimed Yet</p>
+            <p className="text-text-muted text-sm mt-1">Complete your daily Aura Quests and claim the bonus to build your history.</p>
           </div>
         )}
       </motion.div>

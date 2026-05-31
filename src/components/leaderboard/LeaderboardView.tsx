@@ -110,18 +110,18 @@ export default function LeaderboardView({ profile }: Props) {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-text-main flex items-center gap-3">
             <Trophy size={24} className="text-yellow-500" />
             Global Leaderboard
           </h1>
-          <p className="text-[#6b7280] text-sm mt-1">Ranking based on consistency, goal progress, and recovery.</p>
+          <p className="text-text-muted text-sm mt-1">Ranking based on consistency, goal progress, and recovery.</p>
         </div>
       </div>
 
       {/* Table Area */}
-      <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl overflow-hidden">
+      <div className="bg-panel border border-border rounded-2xl overflow-hidden">
         {/* Table Header */}
-        <div className="grid grid-cols-[60px_2fr_1fr_1fr_1fr_100px] gap-4 p-4 border-b border-[#1f1f1f] bg-[#0d0d0d] text-xs font-semibold text-[#6b7280] uppercase tracking-wider items-center">
+        <div className="grid grid-cols-[60px_2fr_1fr_1fr_1fr_100px] gap-4 p-4 border-b border-border bg-surface text-xs font-semibold text-text-muted uppercase tracking-wider items-center">
           <div className="text-center">Rank</div>
           <div>Athlete</div>
           <div className="hidden sm:flex items-center gap-1.5"><TrendingUp size={14}/> Consistency</div>
@@ -146,8 +146,8 @@ export default function LeaderboardView({ profile }: Props) {
                   stiffness: 250,
                   damping: 25
                 }}
-                className={`grid grid-cols-[60px_1fr_auto] sm:grid-cols-[60px_2fr_1fr_1fr_1fr_100px] gap-4 p-4 items-center border-b border-[#1f1f1f] last:border-0 transition-colors ${
-                  athlete.isCurrentUser ? 'bg-primary/5 hover:bg-primary/10' : 'hover:bg-[#161616]'
+                className={`grid grid-cols-[60px_1fr_auto] sm:grid-cols-[60px_2fr_1fr_1fr_1fr_100px] gap-4 p-4 items-center border-b border-border last:border-0 transition-colors ${
+                  athlete.isCurrentUser ? 'bg-primary/5 hover:bg-primary/10' : 'hover:bg-surface'
                 }`}
               >
                 {/* Rank */}
@@ -155,7 +155,7 @@ export default function LeaderboardView({ profile }: Props) {
                   {index === 0 ? <span className="text-yellow-500 text-lg">1</span> :
                    index === 1 ? <span className="text-gray-300 text-lg">2</span> :
                    index === 2 ? <span className="text-amber-600 text-lg">3</span> :
-                   <span className="text-[#6b7280]">{index + 1}</span>}
+                   <span className="text-text-muted">{index + 1}</span>}
                 </div>
 
                 {/* Athlete Name & Avatar */}
@@ -165,7 +165,7 @@ export default function LeaderboardView({ profile }: Props) {
                   </div>
                   <div className="truncate">
                     <div className="flex items-center gap-2">
-                      <span className={`font-semibold truncate ${athlete.isCurrentUser ? 'text-primary' : 'text-white'}`}>
+                      <span className={`font-semibold truncate ${athlete.isCurrentUser ? 'text-primary' : 'text-text-main'}`}>
                         {athlete.name} {athlete.isCurrentUser && '(You)'}
                       </span>
                     </div>
@@ -180,8 +180,8 @@ export default function LeaderboardView({ profile }: Props) {
                 </div>
 
                 {/* Metrics */}
-                <div className="hidden sm:block text-sm text-[#d1d5db]">
-                  <div className="w-full bg-[#1a1a1a] h-1.5 rounded-full mt-1 overflow-hidden">
+                <div className="hidden sm:block text-sm text-text-main">
+                  <div className="w-full bg-surface border border-border/50 h-1.5 rounded-full mt-1 overflow-hidden">
                     <motion.div 
                       initial={{ width: 0 }}
                       animate={{ width: `${athlete.consistency}%` }}
@@ -189,11 +189,11 @@ export default function LeaderboardView({ profile }: Props) {
                       className="bg-blue-500 h-full rounded-full" 
                     />
                   </div>
-                  <span className="text-[10px] text-[#6b7280] mt-1 block">{athlete.consistency}%</span>
+                  <span className="text-[10px] text-text-muted mt-1 block">{athlete.consistency}%</span>
                 </div>
 
-                <div className="hidden md:block text-sm text-[#d1d5db]">
-                  <div className="w-full bg-[#1a1a1a] h-1.5 rounded-full mt-1 overflow-hidden">
+                <div className="hidden md:block text-sm text-text-main">
+                  <div className="w-full bg-surface border border-border/50 h-1.5 rounded-full mt-1 overflow-hidden">
                     <motion.div 
                       initial={{ width: 0 }}
                       animate={{ width: `${athlete.goalProgress}%` }}
@@ -201,11 +201,11 @@ export default function LeaderboardView({ profile }: Props) {
                       className="bg-purple-500 h-full rounded-full" 
                     />
                   </div>
-                  <span className="text-[10px] text-[#6b7280] mt-1 block">{athlete.goalProgress}%</span>
+                  <span className="text-[10px] text-text-muted mt-1 block">{athlete.goalProgress}%</span>
                 </div>
 
-                <div className="hidden lg:block text-sm text-[#d1d5db]">
-                  <div className="w-full bg-[#1a1a1a] h-1.5 rounded-full mt-1 overflow-hidden">
+                <div className="hidden lg:block text-sm text-text-main">
+                  <div className="w-full bg-surface border border-border/50 h-1.5 rounded-full mt-1 overflow-hidden">
                     <motion.div 
                       initial={{ width: 0 }}
                       animate={{ width: `${athlete.sleepQuality}%` }}
@@ -213,7 +213,7 @@ export default function LeaderboardView({ profile }: Props) {
                       className="bg-emerald-500 h-full rounded-full" 
                     />
                   </div>
-                  <span className="text-[10px] text-[#6b7280] mt-1 block">{athlete.sleepQuality}%</span>
+                  <span className="text-[10px] text-text-muted mt-1 block">{athlete.sleepQuality}%</span>
                 </div>
 
                 {/* Total Score */}
@@ -222,7 +222,7 @@ export default function LeaderboardView({ profile }: Props) {
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ type: "spring", stiffness: 200, delay: 0.2 + (index * 0.1) }}
-                    className={`font-bold text-lg inline-block ${athlete.isCurrentUser ? 'text-primary' : 'text-white'}`}
+                    className={`font-bold text-lg inline-block ${athlete.isCurrentUser ? 'text-primary' : 'text-text-main'}`}
                   >
                     {athlete.score.toLocaleString()}
                   </motion.span>

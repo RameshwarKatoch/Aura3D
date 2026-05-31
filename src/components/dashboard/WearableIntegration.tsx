@@ -21,18 +21,18 @@ export default function WearableIntegration({ data, onSync, sleepHours, onRecove
   }, [isHighStrain, onRecoveryAlert]);
 
   return (
-    <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-6 h-full flex flex-col" role="region" aria-label="Bio-Metric Data Overview">
+    <div className="bg-panel border border-border rounded-2xl p-6 h-full flex flex-col shadow-sm" role="region" aria-label="Bio-Metric Data Overview">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-white font-bold text-lg leading-tight">Live Bio-Metrics</h3>
-          <p className="text-[#6b7280] text-xs uppercase tracking-widest mt-1">Smartwatch Sync Active</p>
+          <h3 className="text-text-main font-bold text-lg leading-tight">Live Bio-Metrics</h3>
+          <p className="text-text-muted text-xs uppercase tracking-widest mt-1 font-semibold">Smartwatch Sync Active</p>
         </div>
         <button
           onClick={onSync}
           disabled={data.isSyncing}
           aria-label="Sync wearable data"
           tabIndex={0}
-          className={`p-2.5 rounded-xl border border-[#1f1f1f] bg-[#161616] text-white hover:bg-[#1f1f1f] transition-all ${data.isSyncing ? 'opacity-50' : ''}`}
+          className={`p-2.5 rounded-xl border border-border bg-surface text-text-main hover:bg-border transition-all ${data.isSyncing ? 'opacity-50' : ''}`}
         >
           <RefreshCw size={18} className={data.isSyncing ? 'animate-spin' : ''} />
         </button>
@@ -40,7 +40,7 @@ export default function WearableIntegration({ data, onSync, sleepHours, onRecove
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4" role="list">
         {/* Heart Rate Widget */}
-        <div className="bg-[#161616] border border-[#1f1f1f] rounded-xl p-4 relative overflow-hidden group">
+        <div className="bg-surface border border-border rounded-xl p-4 relative overflow-hidden group">
           <div className="flex items-center gap-3 mb-2">
             <div className="p-2 rounded-lg bg-red-500/10 text-red-500">
               <motion.div
@@ -50,11 +50,11 @@ export default function WearableIntegration({ data, onSync, sleepHours, onRecove
                 <Heart size={18} fill="currentColor" />
               </motion.div>
             </div>
-            <span className="text-[#9ca3af] text-xs font-medium uppercase">Heart Rate</span>
+            <span className="text-text-muted text-xs font-semibold uppercase">Heart Rate</span>
           </div>
           <div className="flex items-baseline gap-1">
-            <span className="text-2xl font-bold text-white">{data.heartRate}</span>
-            <span className="text-[#6b7280] text-sm">BPM</span>
+            <span className="text-2xl font-bold text-text-main">{data.heartRate}</span>
+            <span className="text-text-muted text-sm font-medium">BPM</span>
           </div>
           <div className="absolute bottom-0 left-0 w-full h-1 bg-red-500/20">
             <motion.div
@@ -67,16 +67,16 @@ export default function WearableIntegration({ data, onSync, sleepHours, onRecove
         </div>
 
         {/* HRV Widget */}
-        <div className="bg-[#161616] border border-[#1f1f1f] rounded-xl p-4 relative overflow-hidden group">
+        <div className="bg-surface border border-border rounded-xl p-4 relative overflow-hidden group">
           <div className="flex items-center gap-3 mb-2">
             <div className="p-2 rounded-lg bg-blue-500/10 text-blue-500">
               <Activity size={18} />
             </div>
-            <span className="text-[#9ca3af] text-xs font-medium uppercase">HRV</span>
+            <span className="text-text-muted text-xs font-semibold uppercase">HRV</span>
           </div>
           <div className="flex items-baseline gap-1">
-            <span className="text-2xl font-bold text-white">{data.hrv}</span>
-            <span className="text-[#6b7280] text-sm">ms</span>
+            <span className="text-2xl font-bold text-text-main">{data.hrv}</span>
+            <span className="text-text-muted text-sm font-medium">ms</span>
           </div>
           <div className="absolute bottom-0 left-0 w-full h-1 bg-blue-500/20">
             <motion.div
@@ -89,16 +89,16 @@ export default function WearableIntegration({ data, onSync, sleepHours, onRecove
         </div>
 
         {/* Active Calories Widget */}
-        <div className="bg-[#161616] border border-[#1f1f1f] rounded-xl p-4 relative overflow-hidden group">
+        <div className="bg-surface border border-border rounded-xl p-4 relative overflow-hidden group">
           <div className="flex items-center gap-3 mb-2">
             <div className="p-2 rounded-lg bg-orange-500/10 text-orange-500">
               <Zap size={18} />
             </div>
-            <span className="text-[#9ca3af] text-xs font-medium uppercase">Active Burn</span>
+            <span className="text-text-muted text-xs font-semibold uppercase">Active Burn</span>
           </div>
           <div className="flex items-baseline gap-1">
-            <span className="text-2xl font-bold text-white">{data.calories}</span>
-            <span className="text-[#6b7280] text-sm">kcal</span>
+            <span className="text-2xl font-bold text-text-main">{data.calories}</span>
+            <span className="text-text-muted text-sm font-medium">kcal</span>
           </div>
           <div className="absolute bottom-0 left-0 w-full h-1 bg-orange-500/20">
             <motion.div
@@ -117,14 +117,14 @@ export default function WearableIntegration({ data, onSync, sleepHours, onRecove
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            className="mt-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 flex items-start gap-4"
+            className="mt-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 flex items-start gap-4"
           >
-            <div className="p-2 rounded-full bg-red-500 text-white">
+            <div className="p-2 rounded-full bg-red-500 text-white flex-shrink-0">
               <AlertTriangle size={18} />
             </div>
             <div>
-              <h4 className="text-red-500 font-bold text-sm">High Strain Detected</h4>
-              <p className="text-red-500/80 text-xs mt-0.5">Your HRV is low ({data.hrv}ms) and sleep was under 6h. We recommend switching to Recovery Mode to prevent injury.</p>
+              <h4 className="text-red-700 font-bold text-sm">High Strain Detected</h4>
+              <p className="text-red-600/90 text-xs mt-0.5 font-medium">Your HRV is low ({data.hrv}ms) and sleep was under 6h. We recommend switching to Recovery Mode to prevent injury.</p>
             </div>
           </motion.div>
         )}
@@ -133,12 +133,12 @@ export default function WearableIntegration({ data, onSync, sleepHours, onRecove
       <div className="mt-6 flex items-center justify-between">
         <div className="flex-1">
           <div className="flex justify-between items-center mb-1.5">
-            <span className="text-[#9ca3af] text-xs font-medium">Recovery Score</span>
-            <span className={`text-sm font-bold ${recoveryScore > 70 ? 'text-green-500' : recoveryScore > 40 ? 'text-orange-500' : 'text-red-500'}`}>
+            <span className="text-text-muted text-xs font-medium">Recovery Score</span>
+            <span className={`text-sm font-bold ${recoveryScore > 70 ? 'text-green-600' : recoveryScore > 40 ? 'text-orange-600' : 'text-red-600'}`}>
               {recoveryScore}%
             </span>
           </div>
-          <div className="h-2 bg-[#161616] rounded-full overflow-hidden border border-[#1f1f1f]">
+          <div className="h-2 bg-surface rounded-full overflow-hidden border border-border">
             <motion.div
               className={`h-full rounded-full ${recoveryScore > 70 ? 'bg-green-500' : recoveryScore > 40 ? 'bg-orange-500' : 'bg-red-500'}`}
               initial={{ width: 0 }}

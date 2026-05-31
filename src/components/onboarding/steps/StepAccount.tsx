@@ -23,8 +23,8 @@ export default function StepAccount({ data, update, onNext }: Props) {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold text-white mb-1">Create your account</h2>
-      <p className="text-[#6b7280] mb-8 text-sm">Your personal fitness intelligence starts here.</p>
+      <h2 className="text-2xl font-bold text-text-main mb-1">Create your account</h2>
+      <p className="text-text-muted mb-8 text-sm">Your personal fitness intelligence starts here.</p>
 
       <div className="space-y-4">
         <InputField
@@ -58,7 +58,7 @@ export default function StepAccount({ data, update, onNext }: Props) {
 
       <button
         onClick={() => validate() && onNext()}
-        className="mt-8 w-full bg-emerald-500 hover:bg-emerald-400 text-black font-semibold py-3.5 rounded-xl transition-all duration-200 active:scale-[0.98]"
+        className="mt-8 w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3.5 rounded-xl transition-all duration-200 active:scale-[0.98] shadow-sm"
       >
         Continue
       </button>
